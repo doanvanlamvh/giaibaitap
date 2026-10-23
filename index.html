@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tô Đáp Án – Giải đề trắc nghiệm bằng AI</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#e9efee;--ink:#102a30;--mut:#52676c;--pri:#0d6e7d;--prid:#0a525e;--hl:#ffd23f;--card:#fff;--line:#d2dddc;--err:#b3261e}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 "Be Vietnam Pro",system-ui,sans-serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;gap:10px;padding:18px 0;font-weight:800;font-size:18px}
+header i{width:30px;height:30px;border-radius:8px;background:var(--pri);display:grid;place-items:center;color:#fff;font-style:normal}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding:28px 0 44px}
+h1{font-size:clamp(30px,4.6vw,48px);line-height:1.12;margin:0 0 14px;font-weight:800;letter-spacing:-.02em}
+.hero p.lead{color:var(--mut);font-size:18px;margin:0 0 20px;max-width:46ch}
+.demo{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px 24px;font:400 17px/1.9 "Times New Roman",serif;box-shadow:0 14px 34px -18px rgba(16,42,48,.35)}
+.demo p{margin:0}.demo .q{font-weight:700;margin-bottom:4px}
+.ok span{font-weight:700;color:#c00;background:linear-gradient(var(--hl),var(--hl)) 0 70%/0% 62% no-repeat;animation:sw .9s .5s ease-out forwards}
+@keyframes sw{to{background-size:100% 62%}}
+@media(prefers-reduced-motion:reduce){.ok span{animation:none;background-size:100% 62%}}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:18px}
+.sec h2{display:flex;align-items:center;gap:12px;margin:0 0 16px;font-size:20px}
+.sec h2 b{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:15px}
+.g{display:grid;grid-template-columns:repeat(2,1fr);gap:14px 18px}
+label.f{display:block;font-weight:600;font-size:14px}
+#key{-webkit-text-security:disc;font-family:monospace;resize:vertical}
+label.f>span{display:block;margin-bottom:4px;color:var(--mut);font-weight:500}
+input[type=text],input[type=password],select,textarea{width:100%;padding:10px 12px;border:1px solid #b9c8c7;border-radius:8px;font:inherit;background:#fff;color:var(--ink)}
+:is(input,select,button,.drop):focus-visible{outline:3px solid var(--hl);outline-offset:1px}
+.drop{display:block;border:2px dashed #9db4b3;border-radius:12px;padding:30px 16px;text-align:center;cursor:pointer;background:#f6faf9;transition:.15s}
+.drop:hover,.drop.on{border-color:var(--pri);background:#eaf5f6}.drop input{display:none}
+.drop strong{display:block;font-size:17px}.drop small{color:var(--mut)}
+.row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px}
+.btn{border:0;border-radius:9px;padding:12px 22px;font:600 16px inherit;font-family:inherit;background:var(--pri);color:#fff;cursor:pointer}
+.btn:hover{background:var(--prid)}.btn:disabled{opacity:.5;cursor:wait}
+.btn.s{background:#fff;color:var(--ink);border:1px solid #9db4b3}.btn.s:hover{background:#eef4f3}
+.sw{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid #b9c8c7;border-radius:8px;background:#fff;cursor:pointer;font:600 14px inherit;font-family:inherit}
+.sw i{width:22px;height:22px;border-radius:5px;border:1px solid rgba(0,0,0,.3)}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-radius:10px;cursor:pointer;flex:1 1 260px}
+.opt:has(input:checked){border-color:var(--pri);background:#eaf5f6}.opt small{display:block;color:var(--mut)}
+.opt input{margin-top:5px;accent-color:var(--pri)}
+#log{margin-top:14px;font-size:14px;color:var(--mut);min-height:22px}#log.e{color:var(--err);font-weight:600}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}th{color:var(--mut);font-weight:600}
+td input{width:76px;text-align:center;font-weight:700;text-transform:uppercase}
+.tb{max-height:340px;overflow:auto;border:1px solid var(--line);border-radius:10px}
+#res a{display:inline-block;margin:6px 10px 0 0;padding:10px 16px;border-radius:9px;background:var(--hl);color:var(--ink);font-weight:600;text-decoration:none}
+.note{font-size:13px;color:var(--mut);margin:14px 0 0}
+footer{padding:10px 0 40px;font-size:13px;color:var(--mut)}
+.modal{position:fixed;inset:0;background:rgba(16,42,48,.5);display:flex;align-items:center;justify-content:center;z-index:9;padding:16px}
+.dlg{background:#f3f3f3;border:1px solid #888;border-radius:6px;width:370px;max-width:100%;padding:12px;font-size:14px;box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.dlg h3{margin:0 0 8px;font-size:15px}
+.tabs{display:flex;gap:2px;margin-bottom:-1px;position:relative}
+.tabs button{border:1px solid #aaa;background:#e4e4e4;padding:5px 16px;border-radius:4px 4px 0 0;font:inherit;cursor:pointer}
+.tabs .on{background:#fff;border-bottom-color:#fff}
+.pane{background:#fff;border:1px solid #aaa;padding:12px;min-height:290px}
+.pane p{margin:0 0 4px}#hex polygon{stroke:#fff;stroke-width:.8;cursor:pointer}
+#hex polygon.sel{stroke:#000;stroke-width:2}
+#grays{display:flex;gap:3px;margin-top:4px}#grays i{width:24px;height:20px;border:1px solid #888;cursor:pointer}
+#pad{width:100%;height:150px;border:1px solid #888;cursor:crosshair;touch-action:none}
+#hue{width:100%;margin:8px 0;accent-color:#555}
+.rgb{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rgb label{font-size:12px}.rgb input{width:100%;padding:4px}
+.pv{display:flex;gap:12px;align-items:flex-end;margin:10px 0}
+.pv div{text-align:center;font-size:12px}.pv i{display:block;width:70px;height:34px;border:1px solid #666}
+.bt{display:flex;justify-content:flex-end;gap:8px}.bt button{min-width:80px;padding:5px 10px;border:1px solid #777;background:#e8e8e8;border-radius:3px;font:inherit;cursor:pointer}
+@media(max-width:780px){.hero{grid-template-columns:1fr}.g{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><i>✓</i>Tô Đáp Án</header>
+<section class="hero">
+ <div>
+  <h1>Tải đề trắc nghiệm lên, nhận lại đề đã tô đáp án đúng</h1>
+  <p class="lead">AI giải từng câu, bạn kiểm tra lại, rồi xuất file Word giữ nguyên định dạng đề gốc. Cần thì xuất thêm file lời giải chi tiết.</p>
+  <a class="btn" href="#buoc1" style="text-decoration:none;display:inline-block">Bắt đầu</a>
+ </div>
+ <div class="demo" aria-hidden="true">
+  <p class="q">Câu 3. Nghiệm của phương trình 2x − 6 = 0 là</p>
+  <p>A. x = −3</p><p>B. x = 6</p><p class="ok"><span>C. x = 3</span></p><p>D. x = 0</p>
+ </div>
+</section>
+
+<section class="sec" id="buoc1">
+ <h2><b>1</b>Kết nối AI</h2>
+ <div class="g">
+  <label class="f"><span>Nhà cung cấp</span><select id="prov"></select></label>
+  <label class="f"><span>Mô hình (có thể sửa; Gemini: để "auto" để tự chọn bản mới nhất)</span><input type="text" id="model" autocomplete="off"></label>
+  <label class="f" style="grid-column:1/-1"><span>API key (có thể dán nhiều key, mỗi key một dòng; key hết hạn mức thì web tự chuyển sang key kế tiếp)</span><textarea id="key" rows="3" autocomplete="off" spellcheck="false" placeholder="Dán API key của bạn, mỗi key một dòng"></textarea></label>
+  <label class="f" id="baseW" hidden><span>Địa chỉ API (chat/completions)</span><input type="text" id="base" placeholder="https://openrouter.ai/api/v1/chat/completions"></label>
+ </div>
+ <p class="note">API key và file đề chỉ được gửi trực tiếp từ trình duyệt của bạn tới nhà cung cấp AI đã chọn. Nên dùng mô hình suy luận mạnh để đáp án chính xác hơn.</p>
+</section>
+
+<section class="sec">
+ <h2><b>2</b>Tải đề và phân tích</h2>
+ <label class="drop" id="drop"><input type="file" id="file" accept=".docx,.pdf">
+  <strong id="fname">Chọn hoặc kéo thả file đề (.docx hoặc .pdf)</strong><small>Đề Word: tô màu ngay trên file gốc, giữ nguyên MathType. Đề PDF: AI đọc ảnh các trang rồi dựng lại file Word, công thức xuất thành MathType thật</small></label>
+ <div class="row"><label class="opt" style="flex:1 1 100%"><input type="checkbox" id="vis"><span><b>Đọc công thức bằng ảnh trang đề</b><small>Khuyên dùng khi đề có MathType. Cần mô hình biết nhìn ảnh (Claude, GPT, Gemini đều được). Với đề Word, hãy chọn thêm file PDF của cùng đề (Word: Lưu thành PDF).</small></span></label></div>
+ <label class="f" id="vW" hidden style="margin-top:12px"><span>File PDF của cùng đề (bỏ trống nếu đề gốc đã là PDF)</span><input type="file" id="vpdf" accept=".pdf"></label>
+ <div class="row">
+  <span style="font-weight:600;font-size:14px">Màu đáp án đúng</span>
+  <button class="sw" id="colBtn" type="button"><i></i><span></span></button>
+  <label class="opt" style="flex:0 1 auto;padding:8px 12px"><input type="radio" name="sty" value="text" checked><span>Tô màu chữ</span></label>
+  <label class="opt" style="flex:0 1 auto;padding:8px 12px"><input type="radio" name="sty" value="fill"><span>Tô nền</span></label>
+ </div>
+ <div class="row"><button class="btn" id="go" type="button">Phân tích và giải đề</button></div>
+ <div id="log" role="status"></div>
+</section>
+
+<section class="sec" id="s3" hidden>
+ <h2><b>3</b>Kiểm tra và xuất file</h2>
+ <p class="note" style="margin:0 0 12px">AI có thể nhầm. Sửa trực tiếp ở cột Đáp án nếu cần, file xuất sẽ theo đáp án bạn đã chốt.</p>
+ <div class="tb"><table><thead><tr><th>Câu</th><th>Nội dung</th><th>Đáp án</th></tr></thead><tbody id="rows"></tbody></table></div>
+ <div class="row">
+  <label class="opt"><input type="radio" name="out" value="one" checked><span><b>Chỉ file đáp án đúng</b><small>1 file Word, đáp án đúng được tô màu theo mẫu</small></span></label>
+  <label class="opt"><input type="radio" name="out" value="two"><span><b>Đáp án và lời giải chi tiết</b><small>2 file Word: file đáp án và file lời giải</small></span></label>
+ </div>
+ <div class="row"><button class="btn" id="exp" type="button">Xuất file</button></div>
+ <div id="res"></div><div id="log2" class="note" role="status"></div>
+</section>
+<footer>Với câu trả lời ngắn (không có phương án A–D), đáp án chỉ hiện trong file lời giải. Đề PDF cần mô hình biết nhìn ảnh. Hãy kiểm tra kỹ các câu có hình vẽ hoặc công thức phức tạp.</footer>
+</div>
+
+<div class="modal" id="cd" hidden><div class="dlg" role="dialog" aria-label="Màu sắc">
+ <h3>Màu sắc</h3>
+ <div class="tabs"><button type="button" data-t="std" class="on">Chuẩn</button><button type="button" data-t="cus">Tùy chỉnh</button></div>
+ <div class="pane">
+  <div id="t-std"><p>Màu:</p><svg id="hex" viewBox="-150 -134 300 268" width="100%"></svg><p>Thang xám:</p><div id="grays"></div></div>
+  <div id="t-cus" hidden>
+   <p>Màu:</p><canvas id="pad" width="320" height="150"></canvas>
+   <input type="range" id="hue" min="0" max="359" aria-label="Sắc độ">
+   <div class="rgb"><label>Đỏ<input type="number" id="cr" min="0" max="255"></label><label>Xanh lá<input type="number" id="cg" min="0" max="255"></label><label>Xanh dương<input type="number" id="cb" min="0" max="255"></label><label>Hex<input type="text" id="ch" maxlength="7"></label></div>
+  </div>
+ </div>
+ <div class="pv"><div><i id="pvN"></i>Mới</div><div><i id="pvC"></i>Hiện tại</div></div>
+ <div class="bt"><button type="button" id="cdOK">OK</button><button type="button" id="cdNo">Hủy</button></div>
+</div></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+/* ==== Bộ máy MathType (lấy từ tệp mẫu của người dùng) ==== */
+const MATH_FONT = 'Cambria Math';
+function xmlEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+const SYM = {
+  alpha:'α',beta:'β',gamma:'γ',delta:'δ',epsilon:'ε',varepsilon:'ε',zeta:'ζ',eta:'η',theta:'θ',vartheta:'ϑ',iota:'ι',kappa:'κ',lambda:'λ',mu:'μ',nu:'ν',xi:'ξ',pi:'π',varpi:'ϖ',rho:'ρ',varrho:'ϱ',sigma:'σ',varsigma:'ς',tau:'τ',upsilon:'υ',phi:'φ',varphi:'φ',chi:'χ',psi:'ψ',omega:'ω',
+  Gamma:'Γ',Delta:'Δ',Theta:'Θ',Lambda:'Λ',Xi:'Ξ',Pi:'Π',Sigma:'Σ',Upsilon:'Υ',Phi:'Φ',Psi:'Ψ',Omega:'Ω',
+  cdot:'⋅',times:'×',div:'÷',pm:'±',mp:'∓',ast:'∗',star:'⋆',circ:'∘',bullet:'∙',oplus:'⊕',otimes:'⊗',
+  le:'≤',leq:'≤',leqslant:'≤',ge:'≥',geq:'≥',geqslant:'≥',ne:'≠',neq:'≠',approx:'≈',equiv:'≡',sim:'∼',simeq:'≃',cong:'≅',propto:'∝',ll:'≪',gg:'≫',
+  in:'∈',notin:'∉',ni:'∋',subset:'⊂',subseteq:'⊆',supset:'⊃',supseteq:'⊇',nsubseteq:'⊈',cup:'∪',cap:'∩',emptyset:'∅',varnothing:'∅',setminus:'∖',
+  forall:'∀',exists:'∃',nexists:'∄',neg:'¬',lnot:'¬',land:'∧',wedge:'∧',lor:'∨',vee:'∨',
+  to:'→',rightarrow:'→',leftarrow:'←',leftrightarrow:'↔',Rightarrow:'⇒',Leftarrow:'⇐',Leftrightarrow:'⇔',implies:'⟹',iff:'⟺',mapsto:'↦',uparrow:'↑',downarrow:'↓',longrightarrow:'⟶',Longrightarrow:'⟹',longleftrightarrow:'⟷',nearrow:'↗',searrow:'↘',
+  infty:'∞',partial:'∂',nabla:'∇',angle:'∠',measuredangle:'∡',perp:'⊥',parallel:'∥',nparallel:'∦',triangle:'△',square:'□',prime:'′',
+  ldots:'…',dots:'…',cdots:'⋯',vdots:'⋮',ddots:'⋱',hbar:'ℏ',ell:'ℓ',Re:'ℜ',Im:'ℑ',aleph:'ℵ',therefore:'∴',because:'∵',degree:'°',
+  lfloor:'⌊',rfloor:'⌋',lceil:'⌈',rceil:'⌉',langle:'⟨',rangle:'⟩',vert:'|',Vert:'‖',lbrace:'{',rbrace:'}',
+  '{':'{','}':'}','|':'‖','%':'%','$':'$','#':'#','&':'&','_':'_','\\':'\n'
+};
+const SPACES = {',':'\u2009',';':'\u2005',':':'\u2005','!':'',' ':' ',quad:'\u2003',qquad:'\u2003\u2003',enspace:'\u2002',space:' '};
+const BIGOPS = {sum:'∑',prod:'∏',coprod:'∐',int:'∫',iint:'∬',iiint:'∭',oint:'∮',bigcup:'⋃',bigcap:'⋂',bigoplus:'⨁',bigvee:'⋁',bigwedge:'⋀'};
+const FUNCS = new Set(['sin','cos','tan','cot','sec','csc','arcsin','arccos','arctan','sinh','cosh','tanh','coth','log','ln','lg','exp','det','dim','gcd','deg','ker','arg','Pr','hom','mod','bmod']);
+const LIMOPS = new Set(['lim','max','min','sup','inf','limsup','liminf']);
+const ACC = {vec:'\u20D7',overrightarrow:'\u20D7',overleftarrow:'\u20D6',hat:'\u0302',widehat:'\u0302',tilde:'\u0303',widetilde:'\u0303',dot:'\u0307',ddot:'\u0308',check:'\u030C',acute:'\u0301',grave:'\u0300',breve:'\u0306',mathring:'\u030A'};
+const IGNORE = new Set(['displaystyle','textstyle','scriptstyle','scriptscriptstyle','limits','nolimits','hline','cline','hfill','nonumber','notag','centering','relax','strut','mathstrut']);
+const SKIP_ARG = new Set(['hspace','vspace','phantom','hphantom','vphantom','label','tag']);
+const BIGSIZE = new Set(['big','Big','bigg','Bigg','bigl','bigr','Bigl','Bigr','biggl','biggr','Biggl','Biggr']);
+const BREAK_CMDS = new Set(['le','leq','ge','geq','ne','neq','approx','equiv','sim','simeq','to','rightarrow','Rightarrow','Leftarrow','Leftrightarrow','leftrightarrow','implies','iff','in','notin','ni','subset','subseteq','supset','supseteq','cup','cap','pm','mp','quad','qquad','leqslant','geqslant','land','lor']);
+const RAWSTYLE = {text:'nor',textrm:'nor',mbox:'nor',textbf:'nor_b',textit:'nor_i',mathrm:'p',operatorname:'p',mathbf:'b',boldsymbol:'b',bm:'b',mathit:'i',mathbb:'bb',mathcal:'plain',mathsf:'plain',mathtt:'plain',mathfrak:'plain'};
+const BB = {R:'ℝ',N:'ℕ',Z:'ℤ',Q:'ℚ',C:'ℂ',P:'ℙ',H:'ℍ'};
+
+function readBraced(s, j){ // s[j]==='{'
+  let d=0,i=j;
+  for(;i<s.length;i++){
+    const c=s[i];
+    if(c==='\\'){i++;continue;}
+    if(c==='{')d++;
+    else if(c==='}'){d--; if(d===0){return {text:s.slice(j+1,i),end:i+1};}}
+  }
+  return {text:s.slice(j+1),end:s.length};
+}
+
+function tokenizeLatex(s){
+  const toks=[]; let i=0; const n=s.length; const re=/\\([A-Za-z]+)/y;
+  while(i<n){
+    const c=s[i];
+    if(/\s/.test(c)){i++;continue;}
+    if(c==='\\'){
+      re.lastIndex=i; const m=re.exec(s);
+      if(m){
+        const name=m[1]; i+=m[0].length;
+        let j=i; while(j<n&&/\s/.test(s[j]))j++;
+        if((name==='begin'||name==='end')&&s[j]==='{'){const g=readBraced(s,j); toks.push({k:name,v:g.text.trim()}); i=g.end; continue;}
+        if(RAWSTYLE[name]&&s[j]==='{'){const g=readBraced(s,j); toks.push({k:'text',v:g.text,style:RAWSTYLE[name]}); i=g.end; continue;}
+        toks.push({k:'cmd',v:name});
+      } else { if(i+1<n) toks.push({k:'cmd',v:s[i+1]}); i+=2; }
+      continue;
+    }
+    if('{}^_&'.includes(c)){toks.push({k:'sym',v:c});i++;continue;}
+    toks.push({k:'ch',v:c}); i++;
+  }
+  return toks;
+}
+
+function runXml(t, sty){
+  let rpr='', font=MATH_FONT, extra='';
+  if(sty==='nor'||sty==='nor_b'||sty==='nor_i'){
+    rpr='<m:rPr><m:nor/></m:rPr>'; font='Times New Roman';
+    if(sty==='nor_b') extra='<w:b/>'; if(sty==='nor_i') extra='<w:i/>';
+  } else if(sty){ rpr=`<m:rPr><m:sty m:val="${sty}"/></m:rPr>`; }
+  return `<m:r>${rpr}<w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:cs="${font}"/>${extra}</w:rPr><m:t xml:space="preserve">${xmlEsc(t)}</m:t></m:r>`;
+}
+const mkRun=(t,sty,fn)=>({run:1,t,sty:sty||null,fn:!!fn});
+function emit(items){
+  let out='',cur=null;
+  const flush=()=>{ if(cur&&cur.t!=='') out+=runXml(cur.t,cur.sty); cur=null; };
+  for(const it of items){
+    if(it==null) continue;
+    if(typeof it==='string'){flush(); out+=it;}
+    else if(it.run){ if(cur&&cur.sty===it.sty) cur.t+=it.t; else {flush(); cur={t:it.t,sty:it.sty};} }
+  }
+  flush(); return out;
+}
+function rawToText(v){
+  return v.replace(/\\([A-Za-z]+)/g,(m,n)=>SYM[n]||'').replace(/\\([^A-Za-z])/g,(m,c)=>SPACES[c]!==undefined?SPACES[c]:(SYM[c]||c)).replace(/[{}]/g,'');
+}
+function dXml(open,close,parts,sep){
+  return `<m:d><m:dPr><m:begChr m:val="${xmlEsc(open)}"/>${sep?`<m:sepChr m:val="${xmlEsc(sep)}"/>`:''}<m:endChr m:val="${xmlEsc(close)}"/></m:dPr>${parts.map(p=>`<m:e>${p}</m:e>`).join('')}</m:d>`;
+}
+// ==== MATHTYPE CORE START ====
+// LaTeX -> AST -> MTEF v5 -> OLE (Equation.DSMT4) + ảnh xem trước PNG.
+// Cấu trúc bám theo file .docx mẫu do MathType tạo ra (ProgID Equation.DSMT4).
+
+// ---------- 1. PARSER: LaTeX -> AST ----------
+// Bảng mã Symbol-font (Adobe Symbol) cho ký tự có trong font Symbol
+const MT_SYMPOS = {
+  'α':0x61,'β':0x62,'χ':0x63,'δ':0x64,'ε':0x65,'φ':0x66,'γ':0x67,'η':0x68,'ι':0x69,'ϕ':0x6A,'κ':0x6B,'λ':0x6C,'μ':0x6D,'ν':0x6E,'ο':0x6F,'π':0x70,'θ':0x71,'ρ':0x72,'σ':0x73,'τ':0x74,'υ':0x75,'ϖ':0x76,'ω':0x77,'ξ':0x78,'ψ':0x79,'ζ':0x7A,'ϑ':0x4A,'ς':0x56,
+  'Α':0x41,'Β':0x42,'Χ':0x43,'Δ':0x44,'Ε':0x45,'Φ':0x46,'Γ':0x47,'Η':0x48,'Ι':0x49,'Κ':0x4B,'Λ':0x4C,'Μ':0x4D,'Ν':0x4E,'Ο':0x4F,'Π':0x50,'Θ':0x51,'Ρ':0x52,'Σ':0x53,'Τ':0x54,'Υ':0x55,'Ω':0x57,'Ξ':0x58,'Ψ':0x59,'Ζ':0x5A,
+  '±':0xB1,'×':0xB4,'÷':0xB8,'≤':0xA3,'≥':0xB3,'≠':0xB9,'≈':0xBB,'≡':0xBA,'∞':0xA5,'∂':0xB6,'∇':0xD1,'∈':0xCE,'∉':0xCF,'∋':0x27,'⊂':0xCC,'⊆':0xCD,'⊃':0xC9,'⊇':0xCA,'⊄':0xCB,'∪':0xC8,'∩':0xC7,'∅':0xC6,'∀':0x22,'∃':0x24,
+  '∧':0xD9,'∨':0xDA,'¬':0xD8,'→':0xAE,'←':0xAC,'↔':0xAB,'↑':0xAD,'↓':0xAF,'⇒':0xDE,'⇐':0xDC,'⇔':0xDB,'∠':0xD0,'⊥':0x5E,'∼':0x7E,'≅':0x40,'∝':0xB5,'⋅':0xD7,'°':0xB0,'∴':0x5C,'ℵ':0xC0,'ℜ':0xC2,'ℑ':0xC1,
+  '∑':0xE5,'∏':0xD5,'∫':0xF2,'−':0x2D,'∗':0x2A,'=':0x3D,'+':0x2B,'<':0x3C,'>':0x3E,'|':0x7C,'′':0xA2
+};
+const MT_BIG = new Set(['∑','∏','∫','∬','∭','∮','⋃','⋂','⨁','⋁','⋀','∐']);
+const MT_PUNCT = new Set(['(',')','[',']',',','.',';',':','!','?','/','%','{','}','#','$','&','@','_','"','\\']);
+
+function mtChar(ch, opt){
+  opt = opt||{};
+  const cp = ch.codePointAt(0);
+  let tf, b8 = null;
+  if(opt.tf!==undefined){ tf = opt.tf; }
+  else if(/[0-9]/.test(ch)) tf = 0x88;
+  else if(/[A-Za-z]/.test(ch)) tf = 0x83;
+  else if((cp>=0x3B1&&cp<=0x3C9)||cp===0x3D1||cp===0x3D5||cp===0x3D6||cp===0x3F5) tf = 0x84;
+  else if(cp>=0x391&&cp<=0x3A9) tf = 0x85;
+  else if(MT_PUNCT.has(ch)) tf = 0x88;
+  else if(cp>=0x80 && /\p{L}/u.test(ch)) tf = 0x81;
+  else tf = 0x86;
+  if(opt.b8!==undefined) b8 = opt.b8;
+  else if((tf===0x84||tf===0x85||tf===0x86) && MT_SYMPOS[ch]!==undefined) b8 = MT_SYMPOS[ch];
+  let mt = cp; if(mt>0xFFFF) mt = 0x3F;
+  return {t:'c', ch, tf, mt, b8, fn:!!opt.fn, big: MT_BIG.has(ch)};
+}
+function mtText(str, tf, extra){
+  const out=[]; for(const ch of str){ out.push(mtChar(ch, Object.assign({tf}, extra||{}))); } return out;
+}
+
+const MT_FENCE = { // [kind, left, right]
+  paren:{k:1,l:'(',r:')'}, brack:{k:3,l:'[',r:']'}, brace:{k:2,l:'{',r:'}'}, bar:{k:4,l:'|',r:'|'}, dbar:{k:5,l:'‖',r:'‖'},
+  floor:{k:6,l:'⌊',r:'⌋'}, ceil:{k:7,l:'⌈',r:'⌉'}, angle:{k:0,l:'⟨',r:'⟩'}
+};
+function mtFenceKind(l, r){
+  for(const [name,f] of Object.entries(MT_FENCE)){
+    if((l===''||l===f.l)&&(r===''||r===f.r)&&(l!==''||r!=='')) return name;
+  }
+  return null;
+}
+function mtIsTall(nodes){
+  for(const n of nodes){
+    if(!n) continue;
+    if(n.t==='frac'||n.t==='pile'||n.t==='matrix') return true;
+    if(n.t==='sqrt' && (mtIsTall(n.body)||mtIsTall(n.idx||[]))) return true;
+    if(n.t==='fence' && mtIsTall(n.body)) return true;
+    if(n.t==='over' && mtIsTall(n.body)) return true;
+  }
+  return false;
+}
+
+function mtParseLatex(src){
+  const toks = tokenizeLatex(src); let pos = 0;
+  const isCl = x=>x.k==='sym'&&x.v==='}';
+  const SPECIAL_CMD_CH = {'{':'{','}':'}','%':'%','$':'$','#':'#','&':'&','_':'_','|':'‖'};
+
+  function row(stop){
+    const out=[]; let guard=0;
+    while(pos<toks.length && !stop(toks[pos])){
+      const p0=pos; item(out, stop);
+      if(pos===p0 && ++guard>3){ pos++; guard=0; }
+    }
+    return out;
+  }
+  function scriptArg(){
+    const t=toks[pos]; if(!t) return [];
+    if(t.k==='sym'&&t.v==='{'){ pos++; const r=row(isCl); pos++; return r; }
+    const tmp=[]; atom(()=>false, tmp); return tmp;
+  }
+  function arg(){ return scriptArg(); }
+
+  function item(out, stop){
+    atom(stop, out);
+    let sub=null, sup=null;
+    for(;;){
+      const t=toks[pos]; if(!t) break;
+      if(t.k==='cmd'&&(t.v==='limits'||t.v==='nolimits')){ pos++; continue; }
+      if(t.k==='sym'&&t.v==='^'){ pos++; sup=(sup||[]).concat(scriptArg()); }
+      else if(t.k==='sym'&&t.v==='_'){ pos++; sub=(sub||[]).concat(scriptArg()); }
+      else break;
+    }
+    if(sup && sup.length===1 && sup[0].t==='c' && sup[0].ch==='∘'){ out.push(mtChar('°')); sup=null; }
+    if(sub||sup) out.push({t:'scr', sub, sup});
+  }
+
+  function readDelim(){
+    const t=toks[pos++]; if(!t) return '';
+    if(t.k==='ch') return t.v==='.'?'':t.v;
+    if(t.k==='cmd'){
+      const m={'{':'{','}':'}','|':'‖',langle:'⟨',rangle:'⟩',lfloor:'⌊',rfloor:'⌋',lceil:'⌈',rceil:'⌉',vert:'|',Vert:'‖',lbrace:'{',rbrace:'}',lvert:'|',rvert:'|',lVert:'‖',rVert:'‖'};
+      return m[t.v]||'';
+    }
+    return '';
+  }
+  function makeFence(l, r, body){
+    const kind = mtFenceKind(l, r);
+    return {t:'fence', l, r, kind, body};
+  }
+  function parseEnv(env){
+    const name=env.replace(/\*$/,'');
+    let spec='';
+    if((name==='array'||name==='tabular'||name==='subarray')&&toks[pos]&&toks[pos].k==='sym'&&toks[pos].v==='{'){
+      let d=0; do{const t=toks[pos++]; if(t.k==='sym'&&t.v==='{')d++; else if(t.k==='sym'&&t.v==='}')d--; else if(t.k==='ch'&&/[lcr]/.test(t.v)) spec+=t.v;}while(d>0&&pos<toks.length);
+    }
+    const rows=[[]]; let guard=0;
+    while(pos<toks.length){
+      const p0=pos;
+      const items=row(x=>x.k==='end'||(x.k==='sym'&&x.v==='&')||(x.k==='cmd'&&x.v==='\\'));
+      rows[rows.length-1].push(items);
+      if(pos>=toks.length) break;
+      const t=toks[pos++];
+      if(t.k==='end') break;
+      if(t.k==='cmd'&&t.v==='\\'){
+        if(toks[pos]&&toks[pos].k==='ch'&&toks[pos].v==='['){ while(pos<toks.length&&!(toks[pos].k==='ch'&&toks[pos].v===']'))pos++; pos++; }
+        rows.push([]);
+      }
+      if(pos===p0 && ++guard>3) break;
+    }
+    while(rows.length>1&&rows[rows.length-1].every(c=>c.length===0)) rows.pop();
+    const sp = ()=>mtText('  ',0x81);
+    const joinCells = (cells, withSpace)=>{ let o=[]; cells.forEach((c,i)=>{ if(i>0&&withSpace) o=o.concat(sp()); o=o.concat(c); }); return o; };
+    const mkMatrix = ()=>{
+      const cols=Math.max(1,...rows.map(r=>r.length));
+      rows.forEach(r=>{while(r.length<cols) r.push([]);});
+      return {t:'matrix', rows, cols};
+    };
+    const D={pmatrix:['(',')'],bmatrix:['[',']'],Bmatrix:['{','}'],vmatrix:['|','|'],Vmatrix:['‖','‖']};
+    if(D[name]) return [makeFence(D[name][0],D[name][1],[mkMatrix()])];
+    if((name==='array'||name==='subarray'||name==='tabular')&&spec.length===1){
+      return [{t:'pile', align:{l:1,c:2,r:3}[spec], lines: rows.map(r=>joinCells(r,false))}];
+    }
+    if(name==='matrix'||name==='smallmatrix'||name==='array'||name==='tabular'||name==='subarray') return [mkMatrix()];
+    if(name==='cases'||name==='dcases'||name==='rcases'){
+      const pile={t:'pile', align:1, lines: rows.map(r=>joinCells(r,true))};
+      return name==='rcases' ? [makeFence('','}',[pile])] : [makeFence('{','',[pile])];
+    }
+    if(['aligned','align','alignat','split','gather','gathered','eqnarray','multline','flalign'].includes(name)){
+      return [{t:'pile', align:1, lines: rows.map(r=>joinCells(r,false))}];
+    }
+    return rows.reduce((a,r)=>a.concat(joinCells(r,false)),[]);
+  }
+
+  function atom(stop, out){
+    if(pos>=toks.length) return;
+    const t=toks[pos++];
+    if(t.k==='sym'){
+      if(t.v==='{'){ const r=row(isCl); pos++; r.forEach(x=>out.push(x)); return; }
+      if(t.v==='^'||t.v==='_'){ pos--; return; }
+      return; // '&', '}' lạc
+    }
+    if(t.k==='ch'){
+      const v=t.v;
+      if(v==='-') { out.push(mtChar('−')); return; }
+      if(v==='*') { out.push(mtChar('∗')); return; }
+      if(v==='~') return;
+      if(v==="'") { out.push(mtChar('′')); return; }
+      out.push(mtChar(v)); return;
+    }
+    if(t.k==='text'){
+      const st=t.style; let s=rawToText(t.v);
+      if(st==='nor'||st==='nor_b'||st==='nor_i'){ mtText(s,0x81).forEach(x=>out.push(x)); return; }
+      if(st==='p'){ mtText(s,0x82).forEach(x=>out.push(x)); return; }
+      if(st==='b'){ mtText(s,0x87).forEach(x=>out.push(x)); return; }
+      if(st==='bb') s=s.replace(/[A-Z]/g,c=>BB[c]||c);
+      for(const ch of s){ out.push(BB_SET.has(ch)?mtChar(ch,{tf:0x81}):mtChar(ch)); }
+      return;
+    }
+    if(t.k==='begin'){ parseEnv(t.v).forEach(x=>out.push(x)); return; }
+    if(t.k==='end') return;
+    const name=t.v;
+    if(BIGOPS[name]){ out.push(mtChar(BIGOPS[name])); return; }
+    if(LIMOPS.has(name)||FUNCS.has(name)){
+      const letters = mtText(name,0x82); if(letters.length) letters[0].fn=true;
+      letters.forEach(x=>out.push(x)); return;
+    }
+    if(RAWSTYLE[name]){ // \mathbb R (không có {})
+      const a=arg(); const st=RAWSTYLE[name];
+      a.forEach(x=>{ if(x.t==='c'){
+        if(st==='bb'&&BB[x.ch]) out.push(mtChar(BB[x.ch],{tf:0x81})); else if(st==='p') out.push(Object.assign({},x,{tf:0x82})); else if(st==='b') out.push(Object.assign({},x,{tf:0x87})); else out.push(x);
+      } else out.push(x); });
+      return;
+    }
+    if(ACC[name]){
+      const a=arg();
+      const kindMap={vec:'vec',overrightarrow:'vec',overleftarrow:'vecl',hat:'hat',widehat:'hat',tilde:'tilde',widetilde:'tilde'};
+      const kind=kindMap[name];
+      if(kind){ out.push({t:'over', kind, body:a}); return; }
+      a.forEach(x=>out.push(x)); return; // dot, ddot, check... : bỏ dấu
+    }
+    switch(name){
+      case 'frac': case 'dfrac': case 'tfrac': case 'cfrac': { const a=arg(), b=arg(); out.push({t:'frac', num:a, den:b}); return; }
+      case 'binom': case 'dbinom': case 'tbinom': { const a=arg(), b=arg(); out.push(makeFence('(',')',[{t:'pile',align:2,lines:[a,b]}])); return; }
+      case 'sqrt': {
+        let idx=null;
+        if(toks[pos]&&toks[pos].k==='ch'&&toks[pos].v==='['){ pos++; idx=row(x=>x.k==='ch'&&x.v===']'); pos++; }
+        const body=arg(); out.push({t:'sqrt', body, idx}); return;
+      }
+      case 'overline': case 'bar': { out.push({t:'over', kind:'bar', body:arg()}); return; }
+      case 'underline': { out.push({t:'over', kind:'ubar', body:arg()}); return; }
+      case 'overbrace': case 'underbrace': case 'boxed': case 'mathstrut': { arg().forEach(x=>out.push(x)); return; }
+      case 'overset': case 'stackrel': case 'underset': { const a=arg(); const b=arg(); b.forEach(x=>out.push(x)); return; }
+      case 'left': {
+        const l=readDelim(); const parts=[]; let r='';
+        while(true){
+          const it=row(x=>x.k==='cmd'&&(x.v==='right'||x.v==='middle'));
+          parts.push(it);
+          if(pos>=toks.length) break;
+          const t2=toks[pos++];
+          if(t2.v==='middle'){ readDelim(); parts.push(mtText('|',0x86)); continue; }
+          r=readDelim(); break;
+        }
+        const body=parts.reduce((a,p)=>a.concat(p),[]);
+        out.push(makeFence(l,r,body)); return;
+      }
+      case 'right': case 'middle': readDelim(); return;
+      case 'not': return;
+      case 'xrightarrow': case 'xleftarrow': { arg(); out.push(mtChar(name==='xrightarrow'?'→':'←')); return; }
+      case 'ldots': case 'dots': case 'cdots': { const ch=name==='cdots'?'⋅':'.'; for(let i=0;i<3;i++) out.push(mtChar(ch,{tf:ch==='.'?0x88:0x86})); return; }
+      case 'circ': out.push(mtChar('∘')); return;
+      case 'implies': case 'Longrightarrow': out.push(mtChar('⇒')); return;
+      case 'iff': case 'Longleftrightarrow': out.push(mtChar('⇔')); return;
+      case 'longrightarrow': out.push(mtChar('→')); return;
+      case 'longleftrightarrow': out.push(mtChar('↔')); return;
+      default: break;
+    }
+    if(BIGSIZE.has(name)){ const d=readDelim(); if(d) out.push(mtChar(d)); return; }
+    if(IGNORE.has(name)) return;
+    if(SKIP_ARG.has(name)){ arg(); return; }
+    if(SPACES[name]!==undefined) return;
+    if(SYM[name]!==undefined){
+      const s=SYM[name]; if(s==='\n') return;
+      for(const ch of s) out.push(mtChar(ch)); return;
+    }
+    mtText(name,0x81).forEach(x=>out.push(x)); // lệnh lạ -> chữ thường
+  }
+  return row(()=>false);
+}
+const BB_SET = new Set(['ℝ','ℕ','ℤ','ℚ','ℂ','ℙ','ℍ']);
+
+// ---------- 2. ENCODER: AST -> MTEF v5 ----------
+const MT_PREFIX_HEX = '0501000704' + '44534d543700' + '01' + '13' + '57696e416c6c4261736963436f6465506167657300'
+  + '11' + '05' + '54696d6573204e657720526f6d616e00' + '11' + '03' + '53796d626f6c00' + '11' + '05' + '436f7572696572204e657700' + '11' + '04' + '4d5420457874726100';
+function mtHex(h){ const a=new Uint8Array(h.length/2); for(let i=0;i<a.length;i++) a[i]=parseInt(h.substr(i*2,2),16); return a; }
+
+const SZ_FULL=0, SZ_SUB=1, SZ_SUB2=2, SZ_SYM=3, SZ_SUBSYM=4;
+const SZ_TAG=[0x0a,0x0b,0x0c,0x0d,0x0e];
+function mtSubSize(s){ return s===SZ_FULL?SZ_SUB: s===SZ_SYM?SZ_SUBSYM: SZ_SUB2; }
+
+function mtEncode(ast){
+  const b=[]; let cur=null;
+  const push=(...a)=>{ for(const x of a) b.push(x&255); };
+  const ensure=(s)=>{ if(cur!==s){ push(SZ_TAG[s]); cur=s; } };
+  function ch(n){
+    let opts=0; if(n.b8!==null&&n.b8!==undefined) opts|=0x04; if(n.fn) opts|=0x02;
+    push(0x02, opts, n.tf, n.mt&255, (n.mt>>8)&255);
+    if(opts&0x04) push(n.b8);
+  }
+  function tmplHead(sel, variation){ push(0x03, 0x00, sel); if(variation<128) push(variation); else push((variation&0x7f)|0x80, variation>>7); push(0x00); }
+  function line(nodes, size){
+    ensure(size);
+    if(!nodes||!nodes.length){ push(0x01,0x01); return; }
+    push(0x01,0x00); objs(nodes,size); push(0x00);
+  }
+  function fenceChar(c, kind){
+    const cp=c.codePointAt(0); const asc = cp<128;
+    const mtc = c==='⟨'?0x2329 : c==='⟩'?0x232A : cp;
+    push(0x02, asc?0x04:0x00, 0x86, mtc&255, (mtc>>8)&255); if(asc) push(cp);
+  }
+  function objs(nodes, size){
+    for(let i=0;i<nodes.length;i++){
+      const n=nodes[i];
+      if(n.t==='c'){
+        if(n.big){ ensure(SZ_SYM); ch(n); } else { ensure(size); ch(n); }
+      }
+      else if(n.t==='scr'){
+        ensure(size);
+        const ss=mtSubSize(size);
+        if(n.sub&&n.sup){ tmplHead(29,0); ensure(ss); line(n.sub,ss); line(n.sup,ss); }
+        else if(n.sup){ tmplHead(28,0); ensure(ss); line(null,ss); line(n.sup,ss); }
+        else { tmplHead(27,0); ensure(ss); line(n.sub,ss); line(null,ss); }
+        push(0x00);
+      }
+      else if(n.t==='frac'){ ensure(size); tmplHead(11,0); line(n.num,size); line(n.den,size); push(0x00); }
+      else if(n.t==='sqrt'){
+        ensure(size); tmplHead(10, n.idx?1:0); line(n.body,size); line(n.idx,mtSubSize(mtSubSize(size))); push(0x00);
+      }
+      else if(n.t==='over'){
+        ensure(size);
+        const m={bar:[13,0],ubar:[12,0],vec:[31,2],vecl:[31,1],hat:[33,0],tilde:[32,0]}[n.kind];
+        tmplHead(m[0],m[1]); line(n.body,size); push(0x00);
+      }
+      else if(n.t==='fence'){
+        const f = n.kind && mtIsTall(n.body);
+        if(f){
+          const F=MT_FENCE[n.kind]; ensure(size);
+          tmplHead(F.k, (n.l?1:0)|(n.r?2:0)); line(n.body,size);
+          ensure(size); if(n.l) fenceChar(n.l); if(n.r) fenceChar(n.r); push(0x00);
+        } else {
+          if(n.l){ ensure(size); ch(mtChar(n.l)); }
+          objs(n.body,size);
+          if(n.r){ ensure(size); ch(mtChar(n.r)); }
+        }
+      }
+      else if(n.t==='pile'){
+        ensure(size); push(0x04,0x00,n.align||1,1);
+        n.lines.forEach(l=>line(l,size)); push(0x00);
+      }
+      else if(n.t==='matrix'){
+        const R=n.rows.length, C=n.cols;
+        ensure(size); push(0x05,0x00,1,2,1,R,C);
+        for(let k=0;k<Math.ceil((R+1)/4);k++) push(0);
+        for(let k=0;k<Math.ceil((C+1)/4);k++) push(0);
+        n.rows.forEach(r=>r.forEach(c=>line(c,size)));
+        push(0x00);
+      }
+    }
+  }
+  const pre=mtHex(MT_PREFIX_HEX);
+  cur=null; ensure(SZ_FULL);
+  push(0x01,0x00); objs(ast,SZ_FULL); push(0x00); push(0x00);
+  const out=new Uint8Array(pre.length+b.length); out.set(pre,0); out.set(b,pre.length);
+  return out;
+}
+
+// ---------- 3. OLE (Compound File) ----------
+function mtU16(v){return [v&255,(v>>8)&255];}
+function mtU32(v){return [v&255,(v>>8)&255,(v>>16)&255,(v>>>24)&255];}
+function mtEquationNative(mtef){
+  const hdr=new Uint8Array(28);
+  const dv=new DataView(hdr.buffer);
+  dv.setUint16(0,0x1c,true); dv.setUint32(2,0x00020000,true); dv.setUint16(6,0xC22E,true); dv.setUint32(8,mtef.length,true);
+  dv.setUint32(12,0,true); dv.setUint32(16,0x6ac447d5,true); dv.setUint32(20,0x00c6df2d,true); dv.setUint32(24,0x6ac447d5,true);
+  const o=new Uint8Array(28+mtef.length); o.set(hdr,0); o.set(mtef,28); return o;
+}
+const MT_COMPOBJ = '0100feff030a0000ffffffff03ce020000000000c000000000000046160000004d6174685479706520372e30204571756174696f6e000c0000004d61746854797065204546000f0000004571756174696f6e2e44534d543400f439b271000000000000000000000000';
+const MT_OLE10 = '0100000208000000000000000000000000000000';
+const MT_OBJINFO = '000003000400';
+
+function mtBuildOle(eqNative){
+  const streams=[ ['\u0001CompObj',mtHex(MT_COMPOBJ)], ['\u0001Ole',mtHex(MT_OLE10)], ['\u0003ObjInfo',mtHex(MT_OBJINFO)], ['Equation Native',eqNative] ];
+  const END=0xFFFFFFFE, FREE=0xFFFFFFFF, FATSEC=0xFFFFFFFD;
+  // phân loại mini / thường
+  let mini=[], big=[], miniCount=0;
+  streams.forEach((s,i)=>{
+    if(s[1].length<4096){ const n=Math.max(1,Math.ceil(s[1].length/64)); mini.push({i,start:miniCount,n}); miniCount+=n; }
+    else big.push({i,n:Math.ceil(s[1].length/512)});
+  });
+  const miniFatSecs=Math.ceil(miniCount/128)||1;
+  const miniStreamSecs=Math.ceil(miniCount*64/512)||1;
+  // bố cục sector: 0 FAT, 1-2 dir, 3.. minifat, rồi ministream, rồi big streams
+  const dirStart=1, dirSecs=1+1; // 8 entry (2 sector) giống mẫu của MathType
+  const miniFatStart=dirStart+dirSecs;
+  const miniStreamStart=miniFatStart+miniFatSecs;
+  let next=miniStreamStart+miniStreamSecs;
+  big.forEach(x=>{ x.start=next; next+=x.n; });
+  const total=next;
+  if(total>128) throw new Error('Công thức quá dài cho 1 FAT sector');
+  const fat=new Array(128).fill(FREE);
+  fat[0]=FATSEC;
+  for(let k=0;k<dirSecs;k++) fat[dirStart+k]= k<dirSecs-1?dirStart+k+1:END;
+  for(let k=0;k<miniFatSecs;k++) fat[miniFatStart+k]= k<miniFatSecs-1?miniFatStart+k+1:END;
+  for(let k=0;k<miniStreamSecs;k++) fat[miniStreamStart+k]= k<miniStreamSecs-1?miniStreamStart+k+1:END;
+  big.forEach(x=>{ for(let k=0;k<x.n;k++) fat[x.start+k]= k<x.n-1?x.start+k+1:END; });
+  const mfat=new Array(miniFatSecs*128).fill(FREE);
+  mini.forEach(m=>{ for(let k=0;k<m.n;k++) mfat[m.start+k]= k<m.n-1?m.start+k+1:END; });
+  const buf=new Uint8Array(512+total*512);
+  const dv=new DataView(buf.buffer);
+  buf.set(mtHex('d0cf11e0a1b11ae1'),0);
+  dv.setUint16(24,0x3e,true); dv.setUint16(26,3,true); dv.setUint16(28,0xFFFE,true); dv.setUint16(30,9,true); dv.setUint16(32,6,true);
+  dv.setUint32(44,1,true); dv.setUint32(48,dirStart,true); dv.setUint32(56,4096,true);
+  dv.setUint32(60,miniFatStart,true); dv.setUint32(64,miniFatSecs,true); dv.setUint32(68,END,true); dv.setUint32(72,0,true);
+  for(let k=0;k<109;k++) dv.setUint32(76+k*4, k===0?0:FREE, true);
+  const sec=i=>512+i*512;
+  fat.forEach((v,k)=>dv.setUint32(sec(0)+k*4,v,true));
+  mfat.forEach((v,k)=>dv.setUint32(sec(miniFatStart)+k*4,v,true));
+  // ministream
+  const msBase=sec(miniStreamStart);
+  mini.forEach(m=>{ buf.set(streams[m.i][1], msBase+m.start*64); });
+  big.forEach(x=>{ buf.set(streams[x.i][1], sec(x.start)); });
+  // directory
+  const ent=(idx,name,type,color,L,R,C,start,size,clsid)=>{
+    const o=sec(dirStart)+idx*128;
+    for(let k=0;k<name.length;k++) dv.setUint16(o+k*2,name.charCodeAt(k),true);
+    dv.setUint16(o+64,name.length?(name.length+1)*2:0,true);
+    buf[o+66]=type; buf[o+67]=color; dv.setUint32(o+68,L,true); dv.setUint32(o+72,R,true); dv.setUint32(o+76,C,true);
+    if(clsid) buf.set(mtHex(clsid),o+80);
+    dv.setUint32(o+116,start,true); dv.setUint32(o+120,size,true);
+  };
+  const sinfo=i=>{ const m=mini.find(x=>x.i===i); if(m) return [m.start,streams[i][1].length]; const g=big.find(x=>x.i===i); return [g.start,streams[i][1].length]; };
+  ent(0,'Root Entry',5,1,FREE,FREE,1,miniStreamStart,miniCount*64,'03ce020000000000c000000000000046');
+  ent(1,streams[0][0],2,1,2,3,FREE,...sinfo(0));
+  ent(2,streams[1][0],2,1,FREE,FREE,FREE,...sinfo(1));
+  ent(3,streams[2][0],2,1,FREE,4,FREE,...sinfo(2));
+  ent(4,streams[3][0],2,1,FREE,FREE,FREE,...sinfo(3));
+  return buf;
+}
+// ==== MATHTYPE CORE END ====
+// ==== MATHTYPE PREVIEW START ====
+// ---------- 4. ẢNH XEM TRƯỚC (canvas -> PNG) ----------
+const MT_OPSET = new Set(['+','−','±','∓','×','÷','∗','⋅','=','≠','<','>','≤','≥','≈','≡','∼','≃','≅','∝','→','←','↔','⇒','⇐','⇔','∈','∉','∋','⊂','⊆','⊃','⊇','∪','∩','∧','∨','∖','⊕','⊗','∥','⊥','≪','≫']);
+function mtRender(ast, opts){
+  opts = opts||{};
+  const SCALE = opts.scale||4, BASE = opts.base||12;
+  const FONT = '"Times New Roman","Liberation Serif","Cambria Math","Noto Serif","DejaVu Serif",serif';
+  const cv = document.createElement('canvas'); const mctx = cv.getContext('2d');
+  const sub = s=> s>=11 ? s*7/12 : Math.max(4.5, s*5/7);
+  function fontOf(n, s){
+    const ital = (n.tf===0x83||n.tf===0x84);
+    const bold = n.tf===0x87;
+    return `${ital?'italic ':''}${bold?'bold ':''}${s}px ${FONT}`;
+  }
+  const E = {w:0,a:0,d:0,draw(){}};
+  function chBox(n, s){
+    const sz = n.big ? s*1.5 : s;
+    mctx.font = fontOf(n, sz);
+    const w = mctx.measureText(n.ch).width;
+    const a = n.big ? 0.8*sz : 0.72*s, d = n.big ? 0.3*sz : 0.22*s;
+    const lift = n.big ? 0.12*s : 0; // đưa ký hiệu lớn xuống trục toán
+    return {w, a:a-lift*0, d, op:MT_OPSET.has(n.ch), draw(c,x,y){ c.font=fontOf(n,sz); c.fillText(n.ch,x,y+(n.big?0.25*s:0)); }};
+  }
+  function seq(items){
+    let w=0,a=0,d=0; const xs=[];
+    items.forEach(b=>{ xs.push(w); w+=b.w; a=Math.max(a,b.a); d=Math.max(d,b.d); });
+    return {w,a,d,draw(c,x,y){ items.forEach((b,i)=>b.draw(c,x+xs[i],y)); }};
+  }
+  function pad(b, l, r){ return {w:b.w+l+r,a:b.a,d:b.d,draw(c,x,y){ b.draw(c,x+l,y); }}; }
+  function shift(b, dy){ return {w:b.w,a:b.a-dy,d:b.d+dy,draw(c,x,y){ b.draw(c,x,y-dy); }}; } // dy>0: lên
+  function rowBox(nodes, s){
+    const items=[]; let prevOp=true, prevFn=false;
+    for(let i=0;i<nodes.length;i++){
+      const n=nodes[i];
+      if(n.t==='scr'){
+        const base=items.length?items.pop():{w:0,a:0.72*s,d:0.22*s,draw(){}};
+        items.push(scrBox(base,n,s)); prevOp=false; continue;
+      }
+      let b=nodeBox(n,s);
+      if(n.t==='c'){
+        const isOp = MT_OPSET.has(n.ch) && n.tf===0x86;
+        if(isOp){
+          const nextExists = i<nodes.length-1;
+          if(!prevOp && nextExists){ b=pad(b,0.22*s,0.22*s); }
+          prevOp=true;
+        } else {
+          prevOp = (n.ch==='(' || n.ch==='[' || n.ch==='{' || n.ch===',' );
+        }
+        if(prevFn && n.tf!==0x82) { items.push({w:0.17*s,a:0,d:0,draw(){}}); }
+        prevFn = n.fn || (n.tf===0x82 && prevFn);
+        // kết thúc dãy hàm: thêm khoảng nhỏ sau chữ cuối
+        const nx=nodes[i+1];
+        if(n.tf===0x82 && prevFn && !(nx&&nx.t==='c'&&nx.tf===0x82&&!nx.fn) && !(nx&&nx.t==='scr')){ prevFn=false; b=pad(b,0,0.17*s); }
+      } else { prevOp=false; prevFn=false; }
+      items.push(b);
+    }
+    return seq(items);
+  }
+  function scrBox(base, n, s){
+    const ss=sub(s);
+    const sp = n.sup ? rowBox(n.sup, ss) : null, sb = n.sub ? rowBox(n.sub, ss) : null;
+    let supUp = Math.max(0.42*s, base.a*0.62), subDn = Math.max(0.2*s, base.d+0.1*s);
+    if(sp && sb){ const gap=(supUp - sp.d) - (-(subDn) + sb.a); if(gap<0.2*s){ const k=(0.2*s-gap)/2; supUp+=k; subDn+=k; } }
+    const sw=Math.max(sp?sp.w:0, sb?sb.w:0);
+    return {w:base.w+sw+0.04*s, a:Math.max(base.a, sp?supUp+sp.a:0), d:Math.max(base.d, sb?subDn+sb.d:0),
+      draw(c,x,y){ base.draw(c,x,y); if(sp) sp.draw(c,x+base.w+0.04*s,y-supUp); if(sb) sb.draw(c,x+base.w+0.04*s,y+subDn); }};
+  }
+  function lineBox(nodes, s){ return rowBox(nodes||[], s); }
+  function fenceDraw(c, kind, side, x, top, bot, w, s){
+    c.beginPath(); const mid=(top+bot)/2, H=bot-top;
+    c.lineWidth = Math.max(0.5, s*0.055);
+    const L = side==='l';
+    const xa = L ? x+w : x, xb = L ? x : x+w;       // xa: phía trong, xb: phía ngoài
+    if(kind==='paren'){ c.moveTo(xa,top); c.quadraticCurveTo(xb-(L?-0:0)+(L?-w*0.2:w*0.2),mid,xa,bot); }
+    else if(kind==='brack'||kind==='floor'||kind==='ceil'){
+      const yt = kind==='floor'?top:top, yb=bot;
+      if(kind==='ceil'){ c.moveTo(xa,top); c.lineTo(xb,top); c.lineTo(xb,bot); }
+      else if(kind==='floor'){ c.moveTo(xb,top); c.lineTo(xb,bot); c.lineTo(xa,bot); }
+      else { c.moveTo(xa,yt); c.lineTo(xb,yt); c.lineTo(xb,yb); c.lineTo(xa,yb); }
+    }
+    else if(kind==='brace'){
+      const k=Math.min(0.14*H, 0.6*s), xm=(xa+xb)/2;
+      c.moveTo(xa,top); c.quadraticCurveTo(xm,top,xm,top+k); c.lineTo(xm,mid-k); c.quadraticCurveTo(xm,mid,xb,mid);
+      c.quadraticCurveTo(xm,mid,xm,mid+k); c.lineTo(xm,bot-k); c.quadraticCurveTo(xm,bot,xa,bot);
+    }
+    else if(kind==='bar'){ c.moveTo(x+w/2,top); c.lineTo(x+w/2,bot); }
+    else if(kind==='dbar'){ c.moveTo(x+w*0.3,top); c.lineTo(x+w*0.3,bot); c.moveTo(x+w*0.7,top); c.lineTo(x+w*0.7,bot); }
+    else if(kind==='angle'){ c.moveTo(xa,top); c.lineTo(xb,mid); c.lineTo(xa,bot); }
+    c.stroke();
+  }
+  function nodeBox(n, s){
+    switch(n.t){
+      case 'c': return chBox(n, s);
+      case 'frac': {
+        const num=lineBox(n.num,s), den=lineBox(n.den,s); const ax=0.26*s, g=0.1*s, W=Math.max(num.w,den.w)+0.2*s;
+        return {w:W, a:ax+g+num.d+num.a, d:den.a+den.d+g-ax,
+          draw(c,x,y){ num.draw(c,x+(W-num.w)/2,y-ax-g-num.d); den.draw(c,x+(W-den.w)/2,y-ax+g+den.a);
+            c.lineWidth=Math.max(0.5,s*0.05); c.beginPath(); c.moveTo(x+0.03*s,y-ax); c.lineTo(x+W-0.03*s,y-ax); c.stroke(); }};
+      }
+      case 'sqrt': {
+        const body=lineBox(n.body,s); const idx=n.idx?lineBox(n.idx,sub(sub(s))):null;
+        const top=body.a+0.16*s, bot=body.d+0.04*s, H=top+bot, rw=0.62*s, iw=idx?Math.max(0,idx.w-0.25*s):0;
+        return {w:iw+rw+body.w+0.1*s, a:top+0.04*s, d:bot,
+          draw(c,x,y){
+            const X=x+iw; c.lineWidth=Math.max(0.5,s*0.055); c.beginPath();
+            c.moveTo(X, y-top+0.58*H); c.lineTo(X+0.14*rw, y-top+0.52*H); c.lineTo(X+0.42*rw, y+bot); c.lineTo(X+rw, y-top);
+            c.lineTo(X+rw+body.w+0.1*s, y-top); c.stroke();
+            body.draw(c,X+rw+0.04*s,y);
+            if(idx) idx.draw(c,x,y-top+0.5*H-0.2*s);
+          }};
+      }
+      case 'over': {
+        const body=lineBox(n.body,s);
+        if(n.kind==='ubar') return {w:body.w,a:body.a,d:body.d+0.14*s,draw(c,x,y){ body.draw(c,x,y); c.lineWidth=Math.max(0.5,s*0.05); c.beginPath(); c.moveTo(x,y+body.d+0.08*s); c.lineTo(x+body.w,y+body.d+0.08*s); c.stroke(); }};
+        const extra = n.kind==='bar'?0.14*s : 0.26*s;
+        return {w:body.w,a:body.a+extra,d:body.d,draw(c,x,y){
+          body.draw(c,x,y); const yy=y-body.a-0.1*s; c.lineWidth=Math.max(0.5,s*0.05); c.beginPath();
+          if(n.kind==='bar'){ c.moveTo(x,yy); c.lineTo(x+body.w,yy); }
+          else if(n.kind==='vec'||n.kind==='vecl'){
+            const r=n.kind==='vec'; const x1=x+0.02*s, x2=x+body.w-0.02*s;
+            c.moveTo(x1,yy); c.lineTo(x2,yy);
+            const hx=r?x2:x1, dir=r?-1:1; c.moveTo(hx+dir*0.18*s,yy-0.09*s); c.lineTo(hx,yy); c.lineTo(hx+dir*0.18*s,yy+0.09*s);
+          }
+          else if(n.kind==='hat'){ const m=x+body.w/2, w=Math.min(0.3*s,body.w/2+0.05*s); c.moveTo(m-w,yy+0.08*s); c.lineTo(m,yy-0.08*s); c.lineTo(m+w,yy+0.08*s); }
+          else if(n.kind==='tilde'){ const w=Math.min(0.32*s,body.w/2+0.05*s), m=x+body.w/2; c.moveTo(m-w,yy+0.03*s); c.bezierCurveTo(m-w/2,yy-0.1*s,m-w/4,yy-0.1*s,m,yy); c.bezierCurveTo(m+w/4,yy+0.1*s,m+w/2,yy+0.1*s,m+w,yy-0.03*s); }
+          c.stroke(); }};
+      }
+      case 'fence': {
+        const body=rowBox(n.body,s);
+        if(!(n.kind && mtIsTall(n.body))){
+          const items=[]; if(n.l) items.push(chBox(mtChar(n.l),s)); items.push(body); if(n.r) items.push(chBox(mtChar(n.r),s)); return seq(items);
+        }
+        const ax=0.26*s, half=Math.max(body.a-ax, body.d+ax)+0.1*s, top=ax+half, bot=-ax+half; // trên/dưới trục
+        const wf = n.kind==='brace'?0.5*s : n.kind==='bar'?0.25*s : 0.38*s;
+        const lw=n.l?wf:0, rw=n.r?wf:0;
+        return {w:lw+body.w+rw+0.1*s, a:top, d:bot,
+          draw(c,x,y){ if(n.l) fenceDraw(c,n.kind,'l',x,y-top,y+bot,wf,s); body.draw(c,x+lw+0.05*s,y); if(n.r) fenceDraw(c,n.kind,'r',x+lw+body.w+0.1*s,y-top,y+bot,wf,s); }};
+      }
+      case 'pile': {
+        const ls=n.lines.map(l=>lineBox(l,s)); const g=0.28*s, ax=0.26*s;
+        const W=Math.max(0,...ls.map(l=>l.w)); const tot=ls.reduce((t,l)=>t+l.a+l.d,0)+g*(ls.length-1);
+        const topY=ax+tot/2; // phía trên (so với baseline)
+        return {w:W,a:topY,d:tot-topY,draw(c,x,y){
+          let cy=y-topY; ls.forEach(l=>{ cy+=l.a; const ox=n.align===1?0:n.align===3?W-l.w:(W-l.w)/2; l.draw(c,x+ox,cy); cy+=l.d+g; }); }};
+      }
+      case 'matrix': {
+        const cells=n.rows.map(r=>r.map(c=>lineBox(c,s))); const cw=[],rh=[]; const g=0.28*s, cg=0.9*s, ax=0.26*s;
+        for(let j=0;j<n.cols;j++) cw[j]=Math.max(0,...cells.map(r=>r[j].w));
+        const rA=cells.map(r=>Math.max(0.72*s,...r.map(b=>b.a))), rD=cells.map(r=>Math.max(0.22*s,...r.map(b=>b.d)));
+        const W=cw.reduce((a,b)=>a+b,0)+cg*(n.cols-1); const tot=rA.reduce((a,b)=>a+b,0)+rD.reduce((a,b)=>a+b,0)+g*(cells.length-1);
+        const topY=ax+tot/2;
+        return {w:W,a:topY,d:tot-topY,draw(c,x,y){
+          let cy=y-topY; cells.forEach((r,i)=>{ cy+=rA[i]; let cx=x; r.forEach((b,j)=>{ b.draw(c,cx+(cw[j]-b.w)/2,cy); cx+=cw[j]+cg; }); cy+=rD[i]+g; }); }};
+      }
+    }
+    return E;
+  }
+  const root = rowBox(ast, BASE);
+  const P = 1; // pt lề
+  const W = root.w + 2*P, H = root.a + root.d + 2*P;
+  cv.width = Math.max(1,Math.ceil(W*SCALE)); cv.height = Math.max(1,Math.ceil(H*SCALE));
+  const c = cv.getContext('2d');
+  c.scale(SCALE,SCALE); c.fillStyle='#000'; c.strokeStyle='#000'; c.textBaseline='alphabetic'; c.lineCap='round'; c.lineJoin='round';
+  root.draw(c, P, P+root.a);
+  return { png: cv.toDataURL('image/png').split(',')[1], w: cv.width/SCALE, h: cv.height/SCALE, d: root.d+P };
+}
+// ==== MATHTYPE PREVIEW END ====
+const MT_STATE = {items:[], n:0, failed:0, shapeType:false};
+function mtResetState(){ MT_STATE.items=[]; MT_STATE.n=0; MT_STATE.failed=0; MT_STATE.shapeType=false; }
+const MT_SHAPETYPE = '<v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f"><v:stroke joinstyle="miter"/><v:formulas><v:f eqn="if lineDrawn pixelLineWidth 0"/><v:f eqn="sum @0 1 0"/><v:f eqn="sum 0 0 @1"/><v:f eqn="prod @2 1 2"/><v:f eqn="prod @3 21600 pixelWidth"/><v:f eqn="prod @3 21600 pixelHeight"/><v:f eqn="sum @0 0 1"/><v:f eqn="prod @6 1 2"/><v:f eqn="prod @7 21600 pixelWidth"/><v:f eqn="sum @8 21600 0"/><v:f eqn="prod @7 21600 pixelHeight"/><v:f eqn="sum @10 21600 0"/></v:formulas><v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/><o:lock v:ext="edit" aspectratio="t"/></v:shapetype>';
+// Trả về XML của 1 đối tượng MathType (OLE Equation.DSMT4); null nếu không chuyển được
+function mathtypeObjectXml(latex){
+  try{
+    const ast = mtParseLatex(latex.trim());
+    if(!ast.length) return null;
+    const ole = mtBuildOle(mtEquationNative(mtEncode(ast)));
+    const pv = mtRender(ast);
+    const n = ++MT_STATE.n;
+    MT_STATE.items.push({n, ole, png:pv.png});
+    const id = '_x0000_i' + (1025+n);
+    const st = MT_STATE.shapeType ? '' : MT_SHAPETYPE; MT_STATE.shapeType = true;
+    return `<w:r><w:rPr><w:position w:val="${-Math.round(pv.d*2)}"/></w:rPr><w:object w:dxaOrig="${Math.round(pv.w*20)}" w:dyaOrig="${Math.round(pv.h*20)}">${st}<v:shape id="${id}" type="#_x0000_t75" style="width:${pv.w.toFixed(1)}pt;height:${pv.h.toFixed(1)}pt" o:ole=""><v:imagedata r:id="rIdMtImg${n}" o:title=""/></v:shape><o:OLEObject Type="Embed" ProgID="Equation.DSMT4" ShapeID="${id}" DrawAspect="Content" ObjectID="_${1840000000+n}" r:id="rIdMtOle${n}"/></w:object></w:r>`;
+  }catch(e){ MT_STATE.failed++; if(typeof console!=='undefined') console.warn('MathType lỗi:',latex,e); return null; }
+}
+const unsupp=(m)=>{const e=new Error(m);e.unsupported=true;return e};
+    function cfbStream(d, want) {
+      const dv = new DataView(d.buffer, d.byteOffset, d.byteLength);
+      const ss = 1 << dv.getUint16(30, true), mss = 1 << dv.getUint16(32, true), cut = dv.getUint32(56, true);
+      const nfat = dv.getUint32(44, true), dirStart = dv.getUint32(48, true), mfStart = dv.getUint32(60, true);
+      const sec = (n) => d.subarray(512 + n * ss, 512 + (n + 1) * ss);
+      const u32s = (s) => { const o = []; const v = new DataView(s.buffer, s.byteOffset, s.byteLength); for (let k = 0; k + 4 <= s.length; k += 4) o.push(v.getUint32(k, true)); return o; };
+      const fat = []; for (let i = 0; i < nfat && i < 109; i++) fat.push(...u32s(sec(dv.getUint32(76 + i * 4, true))));
+      const chain = (st, tb) => { const o = []; while (st < 0xFFFFFFFA && o.length < 100000) { o.push(st); st = tb[st]; } return o; };
+      const cat = (arrs) => { const out = new Uint8Array(arrs.reduce((a, b) => a + b.length, 0)); let p = 0; arrs.forEach(a => { out.set(a, p); p += a.length; }); return out; };
+      const dir = cat(chain(dirStart, fat).map(sec)), ents = [];
+      for (let i = 0; i + 128 <= dir.length; i += 128) {
+        const nl = dir[i + 64] | (dir[i + 65] << 8); if (nl < 2) continue;
+        const e = new DataView(dir.buffer, dir.byteOffset + i, 128);
+        ents.push({ name: new TextDecoder('utf-16le').decode(dir.subarray(i, i + nl - 2)), type: dir[i + 66], start: e.getUint32(116, true), size: Number(e.getBigUint64(120, true)) });
+      }
+      const ent = ents.find(e => e.name === want && e.type === 2), root = ents.find(e => e.type === 5);
+      if (!ent) return null;
+      if (ent.size >= cut) return cat(chain(ent.start, fat).map(sec)).subarray(0, ent.size);
+      const mfat = []; chain(mfStart, fat).forEach(n => mfat.push(...u32s(sec(n))));
+      const mini = cat(chain(root.start, fat).map(sec));
+      return cat(chain(ent.start, mfat).map(n => mini.subarray(n * mss, (n + 1) * mss))).subarray(0, ent.size);
+    }
+    // ---- đọc MTEF v5 ----
+    function mtefParse(data) {
+      if (data.length < 8 || data[0] !== 5) throw unsupp('equation đời cũ (MTEF v' + (data[0] || 0) + ')');
+      const j = data.indexOf(0, 5), info = { inline: !!(data[j + 1] & 1), size: null }, n = data.length;
+      const nib = (pos) => (data[pos >> 1] >> (pos % 2 === 0 ? 4 : 0)) & 0xF;
+      const objs = (i) => {
+        const res = [];
+        while (i < n) {
+          const t = data[i];
+          if (t === 0) return [res, i + 1];
+          if (t === 1) { const o = data[i + 1]; i += 2; if (o & 8) i += 2; if (o & 4) i += 2; if (o & 1) res.push({ t: 'l', items: [] }); else { let it; [it, i] = objs(i); res.push({ t: 'l', items: it }); } }
+          else if (t === 2) {
+            const o = data[i + 1]; i += 2; if (o & 8) i += 2;
+            const style = data[i] - 128; i++;
+            let mt = null, pos8 = null;
+            if (!(o & 0x20)) { mt = data[i] | (data[i + 1] << 8); i += 2; }
+            if (o & 4) { pos8 = data[i]; i++; }
+            if (o & 0x10) i += 2;
+            let emb = [];
+            if (o & 1) { let sub; [sub, i] = objs(i); emb = sub.filter(e => e.t === 'e').map(e => e.code); }
+            res.push({ t: 'c', style, mt, pos8, func: !!(o & 2), emb });
+          }
+          else if (t === 3) {
+            const o = data[i + 1]; i += 2; if (o & 8) i += 2;
+            const sel = data[i]; let vr = data[i + 1]; i += 2;
+            if (vr & 0x80) { vr = (vr & 0x7F) | (data[i] << 8); i++; }
+            i++; let it; [it, i] = objs(i); res.push({ t: 't', sel, var: vr, items: it });
+          }
+          else if (t === 4) { const o = data[i + 1]; i += 2; if (o & 8) i += 2; const halign = data[i]; i += 2; let it; [it, i] = objs(i); res.push({ t: 'p', items: it, halign }); }
+          else if (t === 5) { const o = data[i + 1]; i += 2; if (o & 8) i += 2; const r = data[i + 3], c = data[i + 4]; i += 5 + ((r + 4) >> 2) + ((c + 4) >> 2); let it; [it, i] = objs(i); res.push({ t: 'm', items: it }); }
+          else if (t === 6) { const o = data[i + 1]; i += 2; if (o & 8) i += 2; res.push({ t: 'e', code: data[i] }); i++; }
+          else if (t === 7) i += 2 + 3 * data[i + 1];
+          else if (t >= 10 && t <= 14) i += 1;
+          else if (t === 8 || t === 9) i += 3;
+          else if (t === 15) i += 2;
+          else if (t === 17) i = data.indexOf(0, i + 2) + 1;
+          else if (t === 19) i = data.indexOf(0, i + 1) + 1;
+          else if (t === 18) {
+            i += 2;
+            for (let arr = 0; arr < 2; arr++) {
+              const cnt = data[i]; i++; let pos = i * 2, k = 0;
+              while (k < cnt) {
+                if (arr === 0 && k === 0) {
+                  const unit = nib(pos); let digits = '', q = pos + 1;
+                  while (q < n * 2 && nib(q) !== 0xF) { const v = nib(q); digits += v === 0xA ? '.' : v === 0xB ? '-' : String(v); q++; }
+                  if (unit === 2) { const f = parseFloat(digits); if (!isNaN(f)) info.size = f; }
+                }
+                pos += 1;
+                while (pos < n * 2) { const v = nib(pos); pos++; if (v === 0xF) break; }
+                k++;
+              }
+              i = (pos + 1) >> 1;
+            }
+            const cnt = data[i]; i++;
+            for (let q = 0; q < cnt; q++) i += data[i] ? 2 : 1;
+          }
+          else throw unsupp('MTEF có mục lạ (loại ' + t + ')');
+        }
+        return [res, i];
+      };
+      return { top: objs(j + 2)[0], info };
+    }
+    const EMB_ACC = { 2: '\u0307', 3: '\u0308', 4: '\u20db', 8: '\u0303', 9: '\u0302', 11: '\u20d7', 12: '\u20d6', 17: '\u0304' }, EMB_PRIME = { 5: '\u2032', 6: '\u2033', 18: '\u2034' };
+    const TMPL_NAMES = { 5: 'ngoặc kép', 6: 'ngoặc sàn', 7: 'ngoặc trần', 9: 'khoảng', 14: 'tích phân', 15: 'tích phân', 16: 'tích phân', 17: 'tổng', 18: 'tích', 19: 'tổng', 20: 'tích', 21: 'giao/hợp', 22: 'giới hạn', 23: 'mũi tên', 24: 'mũi tên', 25: 'dấu trên/dưới', 26: 'dấu trên/dưới', 30: 'lim', 31: 'mũi tên' };
+    const POS2UNI = {}; Object.entries(MT_SYMPOS).forEach(([u, p]) => { if (!(p in POS2UNI)) POS2UNI[p] = u; });
+    function oChar(c) {
+      let u = c.mt;
+      if (u === null) {
+        if (c.pos8 !== null && c.style === 6 && c.pos8 in POS2UNI) u = POS2UNI[c.pos8].codePointAt(0);
+        else if (c.pos8 !== null && [1, 2, 3, 7, 8].includes(c.style) && c.pos8 >= 32) u = c.pos8;
+        else throw unsupp('ký tự không có mã Unicode');
+      }
+      if (u === 0xEF02) return ',';
+      if (u >= 0xE000 && u <= 0xF8FF) throw unsupp('ký tự đặc biệt của MathType (U+' + u.toString(16).toUpperCase() + ')');
+      return String.fromCodePoint(u);
+    }
+    const oKind = (c) => c.style === 1 ? 'nor' : (c.style === 2 || c.func) ? 'p' : c.style === 7 ? 'b' : '';
+    const mkOB = (half) => ({
+      run(kind, text) {
+        const rp = { nor: '<m:rPr><m:nor/></m:rPr>', p: '<m:rPr><m:sty m:val="p"/></m:rPr>', b: '<m:rPr><m:sty m:val="b"/></m:rPr>' }[kind] || '';
+        const sz = half ? `<w:sz w:val="${half}"/><w:szCs w:val="${half}"/>` : '';
+        return `<m:r>${rp}<w:rPr><w:rFonts w:ascii="Cambria Math" w:hAnsi="Cambria Math"/>${sz}</w:rPr><m:t xml:space="preserve">${xmlEsc(text)}</m:t></m:r>`;
+      },
+      acc: (ch, inner) => `<m:acc><m:accPr><m:chr m:val="${ch}"/></m:accPr><m:e>${inner}</m:e></m:acc>`
+    });
+    function oFlush(atoms, ob) {
+      const out = []; let run = null;
+      const flush = () => { if (run && run[1].trim()) out.push(ob.run(run[0], run[1])); };
+      for (const a of atoms) {
+        if (a[0] === 'c') { if (run && run[0] === a[1]) run[1] += a[2]; else { flush(); run = [a[1], a[2]]; } }
+        else { flush(); run = null; out.push(a[1]); }
+      }
+      flush(); return out.join('');
+    }
+    function oLine(items, ob) {
+      const atoms = [];
+      for (const it of items) {
+        const t = it.t;
+        if (t === 'c') {
+          let text = oChar(it); it.emb.forEach(e => { if (e in EMB_PRIME) text += EMB_PRIME[e]; });
+          const accs = it.emb.filter(e => !(e in EMB_PRIME));
+          if (!accs.length) { atoms.push(['c', oKind(it), text]); continue; }
+          let xml = ob.run(oKind(it), text);
+          for (const e of accs) { if (!(e in EMB_ACC)) throw unsupp('dấu trên ký tự (mã ' + e + ')'); xml = ob.acc(EMB_ACC[e], xml); }
+          atoms.push(['x', xml]);
+        }
+        else if (t === 't') oTmpl(it, atoms, ob);
+        else if (t === 'l') atoms.push(['x', oLine(it.items, ob)]);
+        else if (t === 'p') atoms.push(['x', oPile(it, ob)]);
+        else if (t === 'e') continue;
+        else throw unsupp('thành phần ' + (t === 'm' ? 'ma trận' : t) + ' chưa hỗ trợ');
+      }
+      return oFlush(atoms, ob);
+    }
+    const oIsRel = (c) => { try { return c.t === 'c' && '=<>≤≥≈≠≡∼≃≅'.includes(oChar(c)); } catch (e) { return false; } };
+    function oPile(p, ob) {
+      const lines = p.items.filter(x => x.t === 'l');
+      if (!lines.length) throw unsupp('xếp chồng rỗng');
+      const mc = (jc) => `<m:mc><m:mcPr><m:count m:val="1"/><m:mcJc m:val="${jc}"/></m:mcPr></m:mc>`;
+      if (p.halign === 4) {
+        const rows = lines.map(ln => { const its = ln.items, k = its.findIndex(oIsRel); const pre = k >= 0 ? its.slice(0, k) : [], rest = k >= 0 ? its.slice(k) : its; return `<m:mr><m:e>${oLine(pre, ob)}</m:e><m:e>${oLine(rest, ob)}</m:e></m:mr>`; });
+        return `<m:m><m:mPr><m:mcs>${mc('right')}${mc('left')}</m:mcs></m:mPr>${rows.join('')}</m:m>`;
+      }
+      const jc = { 1: 'left', 3: 'right' }[p.halign] || 'center';
+      return `<m:m><m:mPr><m:mcs>${mc(jc)}</m:mcs></m:mPr>${lines.map(ln => `<m:mr><m:e>${oLine(ln.items, ob)}</m:e></m:mr>`).join('')}</m:m>`;
+    }
+    const oSlot = (x, ob) => x.t === 'l' ? oLine(x.items, ob) : '';
+    function oTmpl(t, atoms, ob) {
+      const sel = t.sel, vr = t.var, main = t.items.filter(x => x.t === 'l' || x.t === 'p'), chars = t.items.filter(x => x.t === 'c');
+      if (sel === 11) {
+        if (vr !== 0 || main.length < 2) throw unsupp('phân số dạng đặc biệt');
+        atoms.push(['x', `<m:f><m:num>${oSlot(main[0], ob)}</m:num><m:den>${oSlot(main[1], ob)}</m:den></m:f>`]);
+      } else if (sel === 10) {
+        if (!main.length) throw unsupp('căn rỗng');
+        const idx = (vr & 1) && main.length > 1 ? oSlot(main[1], ob) : '';
+        atoms.push(['x', idx.trim() ? `<m:rad><m:radPr/><m:deg>${idx}</m:deg><m:e>${oSlot(main[0], ob)}</m:e></m:rad>` : `<m:rad><m:radPr><m:degHide m:val="1"/></m:radPr><m:deg/><m:e>${oSlot(main[0], ob)}</m:e></m:rad>`]);
+      } else if (sel === 27 || sel === 28 || sel === 29) {
+        if (main.length < 2) throw unsupp('chỉ số thiếu ô');
+        const last = atoms.pop(), base = last ? oFlush([last], ob) : '', sub = oSlot(main[0], ob), sup = oSlot(main[1], ob);
+        atoms.push(['x', sel === 27 ? `<m:sSub><m:e>${base}</m:e><m:sub>${sub}</m:sub></m:sSub>` : sel === 28 ? `<m:sSup><m:e>${base}</m:e><m:sup>${sup}</m:sup></m:sSup>` : `<m:sSubSup><m:e>${base}</m:e><m:sub>${sub}</m:sub><m:sup>${sup}</m:sup></m:sSubSup>`]);
+      } else if (sel === 12 || sel === 13) {
+        if (!main.length) throw unsupp('gạch rỗng');
+        atoms.push(['x', `<m:bar><m:barPr><m:pos m:val="${sel === 12 ? 'bot' : 'top'}"/></m:barPr><m:e>${oSlot(main[0], ob)}</m:e></m:bar>`]);
+      } else if (sel >= 1 && sel <= 4) {
+        if (!main.length) throw unsupp('ngoặc rỗng');
+        const names = chars.map(oChar), beg = (vr & 1) && names.length ? names.shift() : '', end = (vr & 2) && names.length ? names.shift() : '';
+        const m0 = main[0], inner = m0.t === 'p' ? `<m:eqArr>${m0.items.map(x => `<m:e>${oSlot(x, ob)}</m:e>`).join('')}</m:eqArr>` : oSlot(m0, ob);
+        atoms.push(['x', `<m:d><m:dPr><m:begChr m:val="${xmlEsc(beg)}"/><m:endChr m:val="${xmlEsc(end)}"/></m:dPr><m:e>${inner}</m:e></m:d>`]);
+      } else if (sel === 33) {
+        if (!main.length || !chars.length) throw unsupp('dấu mũ thiếu ký tự');
+        atoms.push(['x', ob.acc(oChar(chars[0]), oSlot(main[0], ob))]);
+      } else throw unsupp('equation có ' + (TMPL_NAMES[sel] || 'mẫu MathType số ' + sel));
+    }
+    function mtefToOmml(mtef) {
+      const { top, info } = mtefParse(mtef), line = top.find(x => x.t === 'l');
+      if (!line) throw unsupp('equation rỗng');
+      const body = oLine(line.items, mkOB(info.size ? Math.round(info.size * 2) : null));
+      if (!body.trim()) throw unsupp('equation rỗng');
+      return { xml: body, inline: info.inline };
+    }
+</script>
+<script>
+const $=s=>document.querySelector(s),W='http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+const PROV={openai:{n:'OpenAI',m:'gpt-5',u:'https://api.openai.com/v1/chat/completions'},anthropic:{n:'Anthropic Claude',m:'claude-sonnet-5-5'},gemini:{n:'Google Gemini',m:'auto'},deepseek:{n:'DeepSeek',m:'deepseek-chat',u:'https://api.deepseek.com/chat/completions'},custom:{n:'Tùy chỉnh (tương thích OpenAI, vd. OpenRouter)',m:''}};
+const ls={g:k=>{try{return localStorage.getItem(k)}catch(e){return null}},s:(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}}};
+const S={color:ls.g('color')||'#FF0000',ans:{}};
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+/* ---------- cấu hình AI ---------- */
+$('#prov').innerHTML=Object.entries(PROV).map(([k,v])=>`<option value="${k}">${v.n}</option>`).join('');
+function loadProv(){const p=$('#prov').value;const sm=ls.g('m_'+p);$('#model').value=(sm&&(p!=='gemini'||/^gemini-[3-9]/.test(sm)))?sm:PROV[p].m;$('#key').value=ls.g('k_'+p)||'';$('#base').value=ls.g('b_'+p)||'';$('#baseW').hidden=p!=='custom'}
+$('#prov').value=ls.g('prov')||'openai';loadProv();
+$('#prov').onchange=()=>{ls.s('prov',$('#prov').value);loadProv()};
+['model','key','base'].forEach(id=>$('#'+id).onchange=()=>ls.s({model:'m_',key:'k_',base:'b_'}[id]+$('#prov').value,$('#'+id).value.trim()));
+
+async function gemList(k){
+ const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models?pageSize=1000&key='+encodeURIComponent(k)),j=await r.json();
+ if(!r.ok)throw Error(j.error?.message||r.status);
+ const o=[];
+ for(const m of j.models||[]){const id=m.name.replace('models/',''),x=/^gemini-(\d+(?:\.\d+)?)-(pro|flash)(-preview(?:-[\w-]+)?)?$/.exec(id);
+  if(x&&(m.supportedGenerationMethods||[]).includes('generateContent'))o.push({id,v:parseFloat(x[1]),pro:x[2]==='pro'})}
+ const srt=a=>a.sort((p,q)=>q.v-p.v||p.id.length-q.id.length);
+ const r2=[...srt(o.filter(x=>x.pro)),...srt(o.filter(x=>!x.pro))];
+ if(!r2.length)throw Error('Không tìm thấy mô hình Gemini nào dùng được với API key này.');
+ return r2;
+}
+async function callOne(sys,usr,max,imgs,k){
+ const p=$('#prov').value,m=$('#model').value.trim();
+ if(!m)throw Error('Bạn chưa nhập tên mô hình.');
+ let r,j;const H={'content-type':'application/json'};
+ if(p==='anthropic'){
+  r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{...H,'x-api-key':k,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:m,max_tokens:max,system:sys,messages:[{role:'user',content:imgs&&imgs.length?[...imgs.map(d=>({type:'image',source:{type:'base64',media_type:'image/jpeg',data:d}})),{type:'text',text:usr}]:usr}]})});
+  j=await r.json();if(!r.ok)throw KE(r,j);return j.content.map(c=>c.text||'').join('');
+ }
+ if(p==='gemini'){
+  let list=null,cands=[m];
+  if(m==='auto'||!/^gemini-/.test(m)||/^gemini-[12]\./.test(m)){
+   list=await gemList(k);const hv=parseFloat(m.replace(/^gemini-/,''));
+   cands=list.map(x=>x.id);
+   if(hv>=3){const hit=list.filter(x=>x.v===hv).map(x=>x.id);cands=[...hit,...cands.filter(x=>!hit.includes(x))]}
+  }
+  let last,i=0;
+  while(i<cands.length&&i<5){
+   const id=cands[i++];
+   try{
+    r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(id)}:generateContent?key=${encodeURIComponent(k)}`,{method:'POST',headers:H,body:JSON.stringify({systemInstruction:{parts:[{text:sys}]},contents:[{role:'user',parts:[...(imgs||[]).map(d=>({inlineData:{mimeType:'image/jpeg',data:d}})),{text:usr}]}],generationConfig:{maxOutputTokens:max}})});
+    j=await r.json();
+    if(!r.ok){const e=Error(j.error?.message||r.status);e.st=r.status;throw e}
+    if(id!==m){$('#model').value=id;ls.s('m_gemini',id);log('Đã tự chọn mô hình Gemini dùng được: '+id)}
+    return j.candidates[0].content.parts.map(x=>x.text||'').join('');
+   }catch(e){
+    last=e;
+    if(!(e.st===404||/no longer available|limit: 0|not found|quota/i.test(e.message)))throw e;
+    if(!list){try{list=await gemList(k);const tried=cands.slice(0,i);cands=[...tried,...list.map(x=>x.id).filter(x=>!tried.includes(x))]}catch(_){}}
+   }
+  }
+  throw last;
+ }
+ const u=p==='custom'?$('#base').value.trim():PROV[p].u;if(!u)throw Error('Bạn chưa nhập địa chỉ API.');
+ r=await fetch(u,{method:'POST',headers:{...H,authorization:'Bearer '+k},body:JSON.stringify({model:m,messages:[{role:'system',content:sys},{role:'user',content:imgs&&imgs.length?[{type:'text',text:usr},...imgs.map(d=>({type:'image_url',image_url:{url:'data:image/jpeg;base64,'+d}}))]:usr}]})});
+ j=await r.json();if(!r.ok)throw KE(r,j);return j.choices[0].message.content;
+}
+const KE=(r,j)=>{const e=Error(j.error?.message||r.status);e.st=r.status;return e};
+const isKeyErr=e=>[401,402,403,429].includes(e.st)||/quota|rate.?limit|exceeded|billing|insufficient|resource.?exhausted|limit: 0|api key|credit|balance|permission|unauthorized/i.test(e.message||'');
+async function callAI(sys,usr,max,imgs){
+ const ks=$('#key').value.split(/[\s,;]+/).filter(Boolean);
+ if(!ks.length)throw Error('Bạn chưa nhập API key.');
+ const st=(S.ki||0)%ks.length;let last;
+ for(let t=0;t<ks.length;t++){
+  const idx=(st+t)%ks.length;
+  try{
+   const r=await callOne(sys,usr,max,imgs,ks[idx]);
+   if(t>0)log(`API key trước hết hạn mức, đã tự chuyển sang key số ${idx+1}/${ks.length}.`);
+   S.ki=idx;return r;
+  }catch(e){last=e;if(!isKeyErr(e))throw e}
+ }
+ const e=Error((ks.length>1?`Cả ${ks.length} API key đều hết hạn mức hoặc bị từ chối.`:'API key hết hạn mức hoặc bị từ chối.')+' ('+String(last.message||last).slice(0,160)+')');e.keyErr=true;throw e;
+}
+function pj(t){const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a<0)throw Error('AI không trả về dữ liệu hợp lệ.');t=t.slice(a,b+1);
+ try{return JSON.parse(t)}catch(e){return JSON.parse(t.replace(/\\(?!["\\\/bfnrtu])/g,'\\\\'))}}
+
+/* ---------- đọc đề ---------- */
+const qRe=/^\s*(?:Câu|Bài|Question)?\s*\d+\s*[.:)]/i;
+const rKids=r=>[...r.childNodes].filter(c=>c.namespaceURI===W);
+function ptext(p){return [...p.getElementsByTagNameNS(W,'r')].map(rtext).join('')}
+function rtext(r){return rKids(r).map(c=>c.localName==='t'?c.textContent:c.localName==='tab'?'\t':['object','drawing','pict'].includes(c.localName)?'\uFFFC':'').join('')}
+const MM='http://schemas.openxmlformats.org/officeDocument/2006/math';let MT=0,MTL={};
+function omml(root){
+ const k=e=>[...e.childNodes].filter(c=>c.nodeType===1),ch=(e,n)=>k(e).find(c=>c.localName===n);
+ const at=(e,n,d)=>{const c=e&&ch(e,n);return c?(c.getAttributeNS(MM,'val')??c.getAttribute('m:val')??d):d};
+ const g=(e,n)=>{const c=ch(e,n);return c?O(c):''},all=e=>k(e).filter(c=>!/Pr$/.test(c.localName)).map(O).join('');
+ const O=e=>{switch(e.localName){
+  case 'r':return k(e).filter(c=>c.localName==='t').map(c=>c.textContent).join('');
+  case 'f':return at(ch(e,'fPr'),'type','')==='lin'?g(e,'num')+'/'+g(e,'den'):'\\frac{'+g(e,'num')+'}{'+g(e,'den')+'}';
+  case 'rad':{const d=g(e,'deg');return d?'\\sqrt['+d+']{'+g(e,'e')+'}':'\\sqrt{'+g(e,'e')+'}'}
+  case 'sSup':return '{'+g(e,'e')+'}^{'+g(e,'sup')+'}';
+  case 'sSub':return '{'+g(e,'e')+'}_{'+g(e,'sub')+'}';
+  case 'sSubSup':return '{'+g(e,'e')+'}_{'+g(e,'sub')+'}^{'+g(e,'sup')+'}';
+  case 'sPre':return '{}_{'+g(e,'sub')+'}^{'+g(e,'sup')+'}'+g(e,'e');
+  case 'nary':{const p=ch(e,'naryPr'),c=at(p,'chr','∫'),sb=g(e,'sub'),sp=g(e,'sup');return c+(sb?'_{'+sb+'}':'')+(sp?'^{'+sp+'}':'')+' '+g(e,'e')}
+  case 'd':{const p=ch(e,'dPr'),bg=at(p,'begChr','('),en=at(p,'endChr',')'),sp=at(p,'sepChr','|');return bg+k(e).filter(c=>c.localName==='e').map(O).join(sp)+en}
+  case 'func':return g(e,'fName')+' '+g(e,'e');
+  case 'acc':return '\\hat{'+g(e,'e')+'}'+'';
+  case 'bar':return '\\overline{'+g(e,'e')+'}';
+  case 'limLow':return g(e,'e')+'_{'+g(e,'lim')+'}';
+  case 'limUpp':return g(e,'e')+'^{'+g(e,'lim')+'}';
+  case 'm':return '\\begin{matrix}'+k(e).filter(c=>c.localName==='mr').map(r=>k(r).filter(c=>c.localName==='e').map(O).join(' & ')).join(' \\\\ ')+'\\end{matrix}';
+  case 'eqArr':return k(e).filter(c=>c.localName==='e').map(O).join(' \\\\ ');
+  default:return all(e)}};
+ return O(root);
+}
+function ptextAI(p){const f=n=>n.nodeType!==1?'':(n.localName==='t'&&n.namespaceURI===W)?n.textContent:(n.localName==='tab')?'\t':(n.localName==='oMath')?' $'+omml(n)+'$ ':(n.localName==='object'||n.localName==='pict')?(/Equation|DSMT/.test(new XMLSerializer().serializeToString(n))?(()=>{const o=n.getElementsByTagName('o:OLEObject')[0],l=o&&MTL[o.getAttribute('r:id')];if(l)return ' $'+l+'$ ';MT++;return ' [CÔNG THỨC MATHTYPE – KHÔNG ĐỌC ĐƯỢC] '})():' [hình] '):(n.localName==='drawing')?' [hình] ':[...n.childNodes].map(f).join('');return f(p)}
+async function mtPrepare(xd,zip){
+ MTL={};const rels={},rf=zip.file('word/_rels/document.xml.rels');
+ if(rf)[...(await rf.async('string')).matchAll(/<Relationship\b[^>]*>/g)].forEach(m=>{const i=/Id="([^"]+)"/.exec(m[0]),t=/Target="([^"]+)"/.exec(m[0]);if(i&&t)rels[i[1]]=t[1]});
+ for(const o of [...xd.getElementsByTagName('o:OLEObject')]){
+  if(!/Equation\.DSMT|Equation\.3/i.test(o.getAttribute('ProgID')||''))continue;
+  const id=o.getAttribute('r:id'),tg=rels[id];if(!tg||MTL[id]!==undefined)continue;
+  try{
+   const f=zip.file('word/'+tg.replace(/^\.?\//,'').replace(/^word\//,''));
+   const en=cfbStream(new Uint8Array(await f.async('uint8array')),'Equation Native');
+   const {xml}=mtefToOmml(en.subarray(new DataView(en.buffer,en.byteOffset).getUint16(0,true)));
+   MTL[id]=omml(new DOMParser().parseFromString(`<m:oMath xmlns:m="${MM}" xmlns:w="${W}">${xml}</m:oMath>`,'application/xml').documentElement);
+  }catch(e){}
+ }
+}
+const SYS0='Bạn là công cụ OCR đề thi Toán. Chép lại CHÍNH XÁC toàn bộ nội dung trong ảnh trang đề thành văn bản, giữ nguyên thứ tự. Mỗi đoạn, mỗi câu hỏi một dòng riêng; các phương án A. B. C. D. nếu trong đề nằm cùng một dòng thì giữ cùng một dòng. Mọi công thức, biểu thức, số mũ, phân số, căn thức, ký hiệu Toán phải đặt trong $...$ bằng LaTeX chuẩn (\\frac, \\sqrt, ^, _, \\le, \\ge, \\Rightarrow, \\cdot...). Chữ tiếng Việt giữ nguyên dấu và để ngoài $. Không giải bài, không thêm lời dẫn, không dùng markdown, không bọc trong ```. Hình vẽ chỉ ghi [hình]. Bỏ qua số trang.';
+async function load(file){
+ if(/\.docx$/i.test(file.name)){
+  const buf=await file.arrayBuffer();
+  MT=0;S.type='docx';S.zip=await JSZip.loadAsync(buf);S.xml=await S.zip.file('word/document.xml').async('string');
+  const xd=new DOMParser().parseFromString(S.xml,'application/xml');await mtPrepare(xd,S.zip);
+  const P=[...xd.getElementsByTagNameNS(W,'p')];
+  S.L=P.map(ptext);S.AIL=P.map(ptextAI);S.MT=MT;
+ }else if(/\.pdf$/i.test(file.name)){
+  S.type='pdf';S.MT=0;S.partialOcr=null;
+  const imgs=await renderPages(file,2),L=[];
+  for(let i=0;i<imgs.length;i++){
+   log(`AI đang đọc và chép lại trang ${i+1}/${imgs.length} (công thức sẽ chuyển thành LaTeX)…`);
+   let t;try{t=await callAI(SYS0,'Chép lại trang đề này.',8000,[imgs[i]])}catch(e){if(e.keyErr&&L.length){S.partialOcr=i+'/'+imgs.length;S.why=e.message;break}throw e}
+   t.split('\n').map(x=>x.replace(/^```\w*\s*|\s*```$/g,'').trim()).filter(Boolean).forEach(x=>L.push(x));
+  }
+  S.L=L;S.AIL=L;
+ }else throw Error('Chỉ hỗ trợ file .docx và .pdf.');
+ S.Q=[];let cur=null;
+ S.L.forEach((t,i)=>{if(qRe.test(t)){cur={k:S.Q.length+1,idx:[i]};S.Q.push(cur)}else if(cur&&t.trim())cur.idx.push(i)});
+}
+const qText=q=>'[#'+q.k+'] '+q.idx.map(i=>S.AIL[i]).join('\n');
+const chunk=(a,n)=>Array.from({length:Math.ceil(a.length/n)},(_,i)=>a.slice(i*n,i*n+n));
+const log=(t,e)=>{for(const id of['#log','#log2']){$(id).textContent=t;$(id).className=(id==='#log2'?'note ':'')+(e?'e':'')}};
+
+async function renderPages(file,sc){
+ if(!window.pdfjsLib)throw Error('Chưa tải được thư viện đọc PDF, hãy kiểm tra kết nối Internet.');
+ const pdf=await pdfjsLib.getDocument({data:await file.arrayBuffer()}).promise,o=[];
+ for(let i=1;i<=Math.min(pdf.numPages,30);i++){
+  const pg=await pdf.getPage(i),vp=pg.getViewport({scale:sc||1.6}),c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
+  await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;o.push(c.toDataURL('image/jpeg',.82).split(',')[1]);
+ }
+ return o;
+}
+const VIS=' Kèm theo là ẢNH các trang đề. Hãy đọc đề và công thức Toán trực tiếp từ ảnh; phần văn bản chỉ dùng để đánh số [#id] và có thể thiếu công thức. Số thứ tự câu trong văn bản khớp với thứ tự câu trong ảnh.';
+/* ---------- phân tích ---------- */
+const SYS1='Bạn là giáo viên giỏi. Giải từng câu trắc nghiệm dưới đây và chọn đáp án đúng. Mỗi câu bắt đầu bằng nhãn [#id]. Chỉ trả về JSON dạng {"a":[{"id":1,"ans":"B"}]}, không giải thích. Nếu câu không có phương án A-D (trả lời ngắn), ghi giá trị cuối cùng vào ans. Nếu thiếu dữ kiện vì hình ảnh, chọn đáp án khả dĩ nhất.';
+function renderReview(){
+ $('#rows').innerHTML=S.Q.map(q=>`<tr><td>${q.k}</td><td>${esc((S.L[q.idx[0]]||'').slice(0,90))}</td><td><input type="text" maxlength="12" data-k="${q.k}" value="${esc(S.ans[q.k]||'')}" aria-label="Đáp án câu ${q.k}"></td></tr>`).join('');
+ $('#rows').oninput=e=>{if(e.target.dataset.k)S.ans[e.target.dataset.k]=e.target.value.trim().toUpperCase()};
+}
+async function analyze(){
+ const b=$('#go');b.disabled=true;$('#s3').hidden=true;S.Q=[];S.ans={};S.why='';
+ try{
+  if(!S.f)throw Error('Bạn chưa chọn file đề.');
+  log('Đang đọc file…');await load(S.f);
+  if(!S.Q.length)throw Error('Không nhận diện được câu hỏi. Đề cần bắt đầu mỗi câu bằng "Câu 1." hoặc "1.".');
+  S.imgs=null;
+  if($('#vis').checked&&S.type==='docx'){
+   log('Đang chụp ảnh các trang đề…');const vf=$('#vpdf').files[0]||(S.type==='pdf'?S.f:null);
+   if(!vf)throw Error('Bạn đã bật đọc công thức bằng ảnh: hãy chọn thêm file PDF của cùng đề.');
+   S.imgs=await renderPages(vf);
+  }else if(S.MT)throw Error(`Có ${S.MT} công thức MathType thuộc dạng đặc biệt mà web chưa giải mã được nên AI sẽ đoán sai. Hãy tích "Đọc công thức bằng ảnh trang đề" và chọn file PDF của cùng đề (Word: Lưu thành PDF), hoặc đổi MathType sang Word Equation (MathType > Convert Equations) rồi tải lại.`);
+  S.ans={};const parts=S.imgs?[S.Q]:chunk(S.Q,20);
+  for(let i=0;i<parts.length;i++){
+   log(`Đang giải ${S.Q.length} câu… (đợt ${i+1}/${parts.length})`);
+   const j=pj(await callAI(S.imgs?SYS1+VIS:SYS1,parts[i].map(qText).join('\n\n'),S.imgs?8000:4000,S.imgs));
+   (j.a||[]).forEach(x=>S.ans[x.id]=String(x.ans).trim().toUpperCase());
+  }
+  renderReview();
+  $('#s3').hidden=false;$('#res').innerHTML='';log(`Đã giải xong ${S.Q.length} câu. Hãy kiểm tra ở bước 3.`);
+  $('#s3').scrollIntoView({behavior:'smooth'});
+ }catch(e){
+  if(e.keyErr&&S.Q&&S.Q.length){
+   S.why=e.message;renderReview();$('#s3').hidden=false;
+   log(e.message+' Web đang tự động xuất phần đã xử lý…',1);
+   b.disabled=false;await exportFiles(true);
+  }else log(e.message,1);
+ }finally{b.disabled=false}
+}
+$('#go').onclick=analyze;$('#vis').onchange=()=>$('#vW').hidden=!$('#vis').checked;
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+$('#file').onchange=e=>{S.f=e.target.files[0];if(S.f)$('#fname').textContent=S.f.name};
+['dragover','dragleave','drop'].forEach(ev=>$('#drop').addEventListener(ev,e=>{e.preventDefault();$('#drop').classList.toggle('on',ev==='dragover');if(ev==='drop'&&e.dataTransfer.files[0]){S.f=e.dataTransfer.files[0];$('#fname').textContent=S.f.name}}));
+
+/* ---------- tô màu ---------- */
+function qOpts(q){
+ let r=[],need='A';
+ for(const i of q.idx){
+  const t=S.L[i],re=/(^|[\s\t\uFFFC])([A-D])\s*[.)]/g;let m;
+  while((m=re.exec(t))){
+   const c={i,L:m[2],s:m.index+m[1].length,me:m.index+m[0].length};
+   if(m[2]==='A'){r=[c];need='B'}else if(m[2]===need){r.push(c);need=String.fromCharCode(need.charCodeAt(0)+1)}
+  }
+ }
+ return r;
+}
+function opts(t){const r=[],re=/(^|[\s\t])([A-D])\s*[.)]/g;let m,need='A';
+ while((m=re.exec(t))){if(m[2]===need){r.push({L:need,s:m.index+m[1].length,me:m.index+m[0].length});need=String.fromCharCode(need.charCodeAt(0)+1)}}
+ r.forEach((o,i)=>{o.e=i<r.length-1?r[i+1].s:t.length;while(o.e>o.s&&/\s/.test(t[o.e-1]))o.e--});return r}
+const ORD='rStyle rFonts b bCs i iCs caps smallCaps strike dstrike outline shadow emboss imprint noProof snapToGrid vanish webHidden color spacing w kern position sz szCs highlight u effect bdr shd fitText vertAlign rtl cs em lang eastAsianLayout specVanish oMath'.split(' ');
+function setProp(doc,r,name,attrs){
+ let pr=rKids(r).find(c=>c.localName==='rPr');
+ if(!pr){pr=doc.createElementNS(W,'w:rPr');r.insertBefore(pr,r.firstChild)}
+ rKids(pr).filter(c=>c.localName===name).forEach(c=>pr.removeChild(c));
+ const el=doc.createElementNS(W,'w:'+name);for(const k in attrs)el.setAttributeNS(W,'w:'+k,attrs[k]);
+ const me=ORD.indexOf(name),nx=rKids(pr).find(c=>ORD.indexOf(c.localName)>me);pr.insertBefore(el,nx||null);
+}
+function styleRun(doc,r,col,fx){setProp(doc,r,'b',{});if(fx==='fill')setProp(doc,r,'shd',{val:'clear',color:'auto',fill:col});else setProp(doc,r,'color',{val:col})}
+function explode(p){
+ for(const r of [...p.getElementsByTagNameNS(W,'r')]){
+  const k=rKids(r).filter(c=>c.localName!=='rPr');
+  if(k.length<2||!k.every(c=>['t','tab'].includes(c.localName)))continue;
+  k.slice(1).forEach(c=>{const n=r.cloneNode(true);rKids(n).filter(x=>x.localName!=='rPr').forEach(x=>n.removeChild(x));n.appendChild(c);r.parentNode.insertBefore(n,r.nextSibling);});
+  // giữ thứ tự: chèn lại theo đúng thứ tự gốc
+  let ref=r;k.slice(1).forEach(c=>{const n=c.parentNode;ref.parentNode.insertBefore(n,ref.nextSibling);ref=n});
+ }
+}
+function paint(doc,p,s,e,col,fx){
+ explode(p);let pos=0;
+ for(const r of [...p.getElementsByTagNameNS(W,'r')]){
+  const len=rtext(r).length,a=pos;pos+=len;
+  if(!len||a+len<=s||a>=e)continue;
+  const ts=rKids(r).filter(c=>c.localName==='t'),ls=Math.max(s,a)-a,le=Math.min(e,a+len)-a;
+  if(ts.length===1&&rKids(r).every(c=>['t','rPr'].includes(c.localName))&&(ls>0||le<len)){
+   const tx=ts[0].textContent;
+   const mk=(str)=>{const c=r.cloneNode(true),t=rKids(c).find(x=>x.localName==='t');t.textContent=str;t.setAttributeNS('http://www.w3.org/XML/1998/namespace','xml:space','preserve');return c};
+   const mid=mk(tx.slice(ls,le));styleRun(doc,mid,col,fx);
+   if(ls>0)r.parentNode.insertBefore(mk(tx.slice(0,ls)),r);
+   r.parentNode.insertBefore(mid,r);
+   if(le<len)r.parentNode.insertBefore(mk(tx.slice(le)),r);
+   r.parentNode.removeChild(r);
+  }else styleRun(doc,r,col,fx);
+ }
+}
+
+/* ---------- tạo file Word ---------- */
+const ex=s=>String(s).replace(/[^\u0009\u000A\u000D\u0020-\uD7FF\uE000-\uFFFD\u{10000}-\u{10FFFF}]|\uFFFC/gu,'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function okXml(x){const d=new DOMParser().parseFromString(x,'application/xml');if(d.getElementsByTagName('parsererror').length)throw Error('File Word tạo ra bị lỗi cấu trúc XML, chưa thể tải. Hãy báo lại để tôi sửa.')}
+function splitSol(tx){
+ const out={};let cur=null,buf=[];
+ const A=/^\s*#{1,6}\s*(?:\[#)?(?:Câu\s*)?#?(\d+)\]?\s*[:.]?\s*$/i,B=/^\s*\*{0,2}\s*(?:\[#(\d+)\]|Câu\s*(\d+))\s*\*{0,2}\s*[:.]?\s*\*{0,2}\s*$/i;
+ for(const ln of tx.split('\n')){
+  const m=A.exec(ln)||B.exec(ln);
+  if(m){if(cur!==null)out[cur]=buf.join('\n').trim();cur=m[1]||m[2];buf=[]}else if(cur!==null)buf.push(ln);
+ }
+ if(cur!==null)out[cur]=buf.join('\n').trim();
+ return out;
+}
+function toRuns(t,st){
+ const out=[],re=/\$\$([\s\S]+?)\$\$|\$([^$]+?)\$/g;let last=0,m;
+ while((m=re.exec(t))){if(m.index>last)out.push({t:t.slice(last,m.index),...st});out.push({m:(m[1]??m[2]).trim()});last=m.index+m[0].length}
+ if(last<t.length)out.push({t:t.slice(last),...st});
+ return out;
+}
+async function mkDocx(paras){
+ mtResetState();
+ const z=new JSZip(),X='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>',RT='http://schemas.openxmlformats.org/officeDocument/2006/relationships/';
+ const run=r=>`<w:r><w:rPr><w:rFonts w:ascii="Times New Roman" w:hAnsi="Times New Roman" w:cs="Times New Roman"/>${r.b?'<w:b/>':''}${r.c?`<w:color w:val="${r.c}"/>`:''}<w:sz w:val="26"/>${r.f?`<w:shd w:val="clear" w:color="auto" w:fill="${r.f}"/>`:''}</w:rPr><w:t xml:space="preserve">${ex(r.t.replace(/\t/g,'    '))}</w:t></w:r>`;
+ const body=paras.map(p=>'<w:p>'+p.map(r=>r.m!=null?(mathtypeObjectXml(r.m)||run({t:'$'+r.m+'$'})):run(r)).join('')+'</w:p>').join('');
+ let rels='';
+ MT_STATE.items.forEach(it=>{
+  rels+=`<Relationship Id="rIdMtImg${it.n}" Type="${RT}image" Target="media/eq${it.n}.png"/><Relationship Id="rIdMtOle${it.n}" Type="${RT}oleObject" Target="embeddings/oleObject${it.n}.bin"/>`;
+  z.file(`word/media/eq${it.n}.png`,it.png,{base64:true});z.file(`word/embeddings/oleObject${it.n}.bin`,it.ole);
+ });
+ z.file('[Content_Types].xml',X+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Default Extension="png" ContentType="image/png"/><Default Extension="bin" ContentType="application/vnd.openxmlformats-officedocument.oleObject"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>');
+ z.file('_rels/.rels',X+`<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="${RT}officeDocument" Target="word/document.xml"/></Relationships>`);
+ z.file('word/_rels/document.xml.rels',X+`<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">${rels}</Relationships>`);
+ const dx=X+`<w:document xmlns:w="${W}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w10="urn:schemas-microsoft-com:office:word"><w:body>${body}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>`;okXml(dx);z.file('word/document.xml',dx);
+ return z.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',compression:'DEFLATE'});
+}
+const MIME='application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+
+/* ---------- xuất file ---------- */
+const SYS2='Bạn là giáo viên giỏi. Viết lời giải CHI TIẾT cho từng câu dưới đây: nêu rõ từng bước biến đổi, lập luận và kết luận (tuyệt đối không chỉ nêu đáp án; với câu trắc nghiệm hãy giải ra kết quả rồi đối chiếu để chọn phương án) (mỗi câu có nhãn [#id] và đáp án đúng đã chốt). Hãy giải thích để dẫn tới đúng đáp án đó; nếu thấy đáp án đã chốt sai thì nói rõ ở đầu lời giải. Mọi công thức, biểu thức Toán viết bằng LaTeX trong dấu $...$ (ví dụ $\\frac{1}{2}$, $\\sqrt{x}$, $x^2$, $\\le$); chữ tiếng Việt để ngoài $. Định dạng trả về: với mỗi câu, một dòng riêng "### id" (ví dụ "### 1"), các dòng sau là lời giải của câu đó. Không dùng markdown, không dùng JSON, không lời dẫn.';
+async function exportFiles(auto){
+ const b=$('#exp');b.disabled=true;$('#res').innerHTML='';
+ try{
+  const two=document.querySelector('[name=out]:checked').value==='two',fx=document.querySelector('[name=sty]:checked').value,col=S.color.slice(1),base=S.f.name.replace(/\.\w+$/,''),files=[];let stopped=null;
+  const pick=q=>{const a=S.ans[q.k];return /^[A-D]$/.test(a)?a:null};
+  log('Đang tạo file đáp án…');
+  let blob;
+  if(S.type==='docx'){
+   const doc=new DOMParser().parseFromString(S.xml,'application/xml'),P=[...doc.getElementsByTagNameNS(W,'p')];
+   S.Q.forEach(q=>{const a=pick(q);if(!a)return;const o=qOpts(q).find(o=>o.L===a);if(o)paint(doc,P[o.i],o.s,o.me,col,fx)});
+   let dxml=new XMLSerializer().serializeToString(doc);if(!/^<\?xml/.test(dxml))dxml='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'+dxml;okXml(dxml);S.zip.file('word/document.xml',dxml);
+   blob=await S.zip.generateAsync({type:'blob',mimeType:MIME,compression:'DEFLATE'});
+  }else{
+   const hit={};S.Q.forEach(q=>{const a=pick(q);if(a){const o=qOpts(q).find(o=>o.L===a);if(o)hit[o.i]=o}});
+   log('Đang tạo file Word, công thức được chuyển thành MathType…');
+   blob=await mkDocx(S.L.map((t,i)=>{const o=hit[i];if(!o)return toRuns(t);const st=fx==='fill'?{f:col}:{c:col};
+    return [...toRuns(t.slice(0,o.s)),{t:t.slice(o.s,o.me),b:1,...st},...toRuns(t.slice(o.me))]}));
+  }
+  files.push([base+'_DapAn.docx',blob]);
+  if(two){
+   const sol={};
+   const ask=async(qs,label)=>{
+    log(label);let tx;
+    try{tx=await callAI(S.imgs?SYS2+VIS:SYS2,qs.map(q=>qText(q)+'\nĐáp án đã chốt: '+(S.ans[q.k]||'(chưa có)')).join('\n\n'),12000,S.imgs)}
+    catch(e){if(e.keyErr){stopped=e.message;return}throw e}
+    Object.entries(splitSol(tx)).forEach(([k,v])=>{if(v)sol[k]=v});
+   };
+   const parts=chunk(S.Q,8);
+   for(let i=0;i<parts.length&&!stopped;i++)await ask(parts[i],`Đang viết lời giải… (đợt ${i+1}/${parts.length})`);
+   for(let pass=0;pass<2&&!stopped;pass++){
+    const need=S.Q.filter(q=>!sol[q.k]);if(!need.length)break;
+    const mp=chunk(need,4);
+    for(let i=0;i<mp.length&&!stopped;i++)await ask(mp[i],`Đang viết bù lời giải cho ${need.length} câu còn thiếu…`);
+   }
+   const P=[[{t:'LỜI GIẢI CHI TIẾT – '+base,b:1}],[{t:''}]];
+   S.Q.forEach(q=>{
+    q.idx.forEach(i=>P.push(toRuns(S.AIL[i].trim())));
+    P.push([{t:'Đáp án: '+(S.ans[q.k]||'—'),b:1,c:col}],[{t:'Lời giải:',b:1}]);
+    (sol[q.k]||(stopped?'(Chưa có lời giải vì API hết hạn mức)':'(Chưa có lời giải)')).split('\n').forEach(l=>P.push(toRuns(l)));P.push([{t:''}]);
+   });
+   files.push([base+'_LoiGiai.docx',await mkDocx(P)]);
+  }
+  $('#res').innerHTML=files.map(([n,bl])=>`<a href="${URL.createObjectURL(bl)}" download="${esc(n)}">Tải ${esc(n)}</a>`).join('');
+  const miss=S.Q.filter(q=>!/^[A-D]$/.test(S.ans[q.k]||'')).length,part=auto||stopped||miss||S.partialOcr;
+  log((S.why?S.why+' ':'')+(part?'Đã tự động xuất phần làm được. ':'Đã tạo xong. ')+(S.partialOcr?`Chỉ đọc được ${S.partialOcr} trang đầu của đề. `:'')+(stopped?'Một số câu chưa có lời giải. ':'')+(miss?`Có ${miss} câu chưa có đáp án để tô màu. `:'')+'Bấm vào nút để tải file.',!!(S.why||stopped));
+  S.why='';
+  if(auto)[...document.querySelectorAll('#res a')].forEach((a,i)=>setTimeout(()=>a.click(),i*700));
+ }catch(e){log(e.message,1)}finally{b.disabled=false}
+}
+$('#exp').onclick=()=>exportFiles();
+
+/* ---------- hộp thoại chọn màu kiểu Excel ---------- */
+const h2r=h=>[1,3,5].map(i=>parseInt(h.substr(i,2),16));
+const r2h=(r,g,b)=>'#'+[r,g,b].map(x=>Math.max(0,Math.min(255,Math.round(x))).toString(16).padStart(2,'0')).join('').toUpperCase();
+const HSL=(h,s,l)=>{s/=100;l/=100;const a=s*Math.min(l,1-l),f=n=>{const k=(n+h/30)%12;return l-a*Math.max(-1,Math.min(k-3,9-k,1))};return r2h(f(0)*255,f(8)*255,f(4)*255)};
+function r2v([r,g,b]){r/=255;g/=255;b/=255;const M=Math.max(r,g,b),m=Math.min(r,g,b),d=M-m;let h=0;if(d){h=M===r?((g-b)/d)%6:M===g?(b-r)/d+2:(r-g)/d+4;h*=60;if(h<0)h+=360}return[h,M?d/M:0,M]}
+function v2r(h,s,v){const f=n=>{const k=(n+h/60)%6;return(v-v*s*Math.max(0,Math.min(k,4-k,1)))*255};return[f(5),f(3),f(1)]}
+(function(){
+ const R=6,Z=13,sv=$('#hex');let out='';
+ for(let q=-R;q<=R;q++)for(let r=-R;r<=R;r++){
+  const ring=(Math.abs(q)+Math.abs(r)+Math.abs(q+r))/2;if(ring>R)continue;
+  const x=Z*Math.sqrt(3)*(q+r/2),y=Z*1.5*r,ang=(Math.atan2(y,x)*180/Math.PI+360)%360;
+  const c=ring===0?'#FFFFFF':HSL(ang,100,ring<=3?100-ring*(50/3):50-(ring-3)*(35/3));
+  const pts=[0,1,2,3,4,5].map(i=>{const a=(30+60*i)*Math.PI/180;return(x+(Z-.5)*Math.cos(a)).toFixed(1)+','+(y+(Z-.5)*Math.sin(a)).toFixed(1)}).join(' ');
+  out+=`<polygon points="${pts}" fill="${c}" data-c="${c}"/>`;
+ }
+ sv.innerHTML=out;
+ $('#grays').innerHTML=Array.from({length:11},(_,i)=>{const v=Math.round(255-i*25.5);const c=r2h(v,v,v);return`<i style="background:${c}" data-c="${c}"></i>`}).join('');
+})();
+function openColor(init){return new Promise(res=>{
+ const d=$('#cd'),pad=$('#pad'),cx=pad.getContext('2d');let cur=init,hsv=r2v(h2r(init));
+ const done=v=>{d.hidden=true;res(v)};
+ function upd(skip){
+  $('#pvN').style.background=cur;const [r,g,b]=h2r(cur);
+  if(skip!=='rgb'){$('#cr').value=r;$('#cg').value=g;$('#cb').value=b}if(skip!=='hex')$('#ch').value=cur;$('#hue').value=Math.round(hsv[0])%360;
+  cx.fillStyle=HSL(hsv[0],100,50);cx.fillRect(0,0,320,150);
+  let g1=cx.createLinearGradient(0,0,320,0);g1.addColorStop(0,'#fff');g1.addColorStop(1,'rgba(255,255,255,0)');cx.fillStyle=g1;cx.fillRect(0,0,320,150);
+  g1=cx.createLinearGradient(0,0,0,150);g1.addColorStop(0,'rgba(0,0,0,0)');g1.addColorStop(1,'#000');cx.fillStyle=g1;cx.fillRect(0,0,320,150);
+  cx.beginPath();cx.arc(hsv[1]*320,(1-hsv[2])*150,6,0,7);cx.strokeStyle='#fff';cx.lineWidth=2;cx.stroke();cx.strokeStyle='#000';cx.lineWidth=1;cx.stroke();
+  document.querySelectorAll('#hex polygon').forEach(p=>p.classList.toggle('sel',p.dataset.c===cur));
+ }
+ const setHex=h=>{cur=h;hsv=r2v(h2r(h))};
+ const fromHSV=()=>{cur=r2h(...v2r(...hsv))};
+ d.hidden=false;$('#pvC').style.background=init;
+ document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));$('#t-std').hidden=b.dataset.t!=='std';$('#t-cus').hidden=b.dataset.t!=='cus';upd()});
+ $('#hex').onclick=e=>{if(e.target.dataset.c){setHex(e.target.dataset.c);upd()}};
+ $('#grays').onclick=$('#hex').onclick;
+ const pp=e=>{const b=pad.getBoundingClientRect();hsv[1]=Math.max(0,Math.min(1,(e.clientX-b.left)/b.width));hsv[2]=1-Math.max(0,Math.min(1,(e.clientY-b.top)/b.height));fromHSV();upd()};
+ pad.onpointerdown=e=>{pad.setPointerCapture(e.pointerId);pp(e)};pad.onpointermove=e=>{if(e.buttons)pp(e)};
+ $('#hue').oninput=e=>{hsv[0]=+e.target.value;fromHSV();upd()};
+ ['cr','cg','cb'].forEach(id=>$('#'+id).oninput=()=>{setHex(r2h($('#cr').value||0,$('#cg').value||0,$('#cb').value||0));upd('rgb')});
+ $('#ch').oninput=e=>{let v=e.target.value.trim();if(v[0]!=='#')v='#'+v;if(/^#[0-9a-f]{6}$/i.test(v)){setHex(v.toUpperCase());upd('hex')}};
+ $('#cdOK').onclick=()=>done(cur);$('#cdNo').onclick=()=>done(null);
+ d.onclick=e=>{if(e.target===d)done(null)};d.onkeydown=e=>{if(e.key==='Escape')done(null)};
+ upd();$('#cdOK').focus();
+})}
+function showColor(){$('#colBtn i').style.background=S.color;$('#colBtn span').textContent=S.color}
+$('#colBtn').onclick=async()=>{const c=await openColor(S.color);if(c){S.color=c;ls.s('color',c);showColor()}};
+showColor();
+</script>
+</body>
+</html>
